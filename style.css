@@ -1,0 +1,101 @@
+/* Базовые настройки страницы */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Комфортный современный шрифт */
+  line-height: 1.6;
+  color: #FFFFFF;
+
+  /* Сложный многослойный фон */
+  background-image: 
+    url('Artur.png'),   /* 1 */
+    url('Artur.png'),   /* 2 */
+    url('Kotost.png'),  /* 3 */
+    url('Artur.png'),   /* 4 */
+    url('Mell1.jpg'),   /* 5 */
+    url('Artur.png'),   /* 6 */
+    url('Artur.png'),   /* 7 */
+    url('Mell1.jpg'),   /* 8 */
+    url('Artur.png'),   /* 9 */
+    url('Kotost.png'),  /* 10 */
+    linear-gradient(to bottom right, #1f2022 0%, #2c2d30 25%, #161719 50%, #2a2b2e 75%, #121314 100%);
+  
+  background-repeat: no-repeat;
+  
+  background-position: 
+    10% 15%,   /* 1  - вверху слева */
+    40% 8%,    /* 2  */
+    85% 12%,   /* 3  - вверху справа */
+    25% 40%,   /* 4  */
+    75% 45%,   /* 5  */
+    5% 65%,    /* 6  */
+    50% 60%,   /* 7  */
+    93% 70%,   /* 8  */
+    30% 90%,   /* 9  */
+    70% 88%,   /* 10 - внизу справа */
+    center;    /* Градиент */
+
+  background-size: 
+    80px auto,  /* 1 */
+    110px auto, /* 2 */
+    90px auto,  /* 3 */
+    130px auto, /* 4 */
+    70px auto,  /* 5 */
+    100px auto, /* 6 */
+    120px auto, /* 7 */
+    85px auto,  /* 8 */
+    95px auto,  /* 9 */
+    115px auto, /* 10 */
+    cover;      /* Градиент */
+}
+
+/* Автоматические отступы между всеми текстовыми элементами */
+body > * {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+body > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Стилизация текста */
+h1, h2, h3, h4, h5, h6, p, strong {
+  color: #FFFFFF;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em; /* Делает крупные заголовки аккуратнее */
+  margin-top: 2rem;
+}
+
+/* Современная стилизация кнопки */
+button {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  
+  /* Границы и скругление */
+  border: 1px solid rgba(34, 119, 119, 0.6);
+  
+  /* Фон */
+  background: linear-gradient(135deg, #2c2d30 0%, #1f2022 50%, #121314 100%);
+  
+  /* Эффекты */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Мягкая тень */
+  transition: all 0.2s ease-in-out; /* Плавная анимация при наведении */
+}
+
+/* Эффекты кнопки при взаимодействии */
+button:hover {
+  background: linear-gradient(135deg, #3a3b3e 0%, #252629 50%, #1a1b1d 100%);
+  border-color: #227777; /* Подсветка рамки */
+  transform: translateY(-2px); /* Легкое приподнимание */
+  box-shadow: 0 6px 16px rgba(34, 119, 119, 0.2); /* Свечение */
+}
+
+button:active {
+  transform: translateY(0); /* Возврат при клике */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
