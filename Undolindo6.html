@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  
+  <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113657454', 'ym');
+
+    ym(113657454, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113657454" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undolindo — учи английский с червяком! От ValGDZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #58CC02;
+  --green-dark: #46a302;
+  --green-light: #d7f7b0;
+  --blue: #1CB0F6;
+  --blue-dark: #0a90d4;
+  --red: #FF4B4B;
+  --orange: #FF9600;
+  --yellow: #FFC800;
+  --purple: #CE82FF;
+  --gray-bg: #f7f7f7;
+  --gray-light: #e5e5e5;
+  --gray-mid: #afafaf;
+  --gray-dark: #777;
+  --text: #3c3c3c;
+  --white: #fff;
+  --worm: #8BC34A;
+  --worm-dark: #689F38;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--gray-bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== SCREENS ===== */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ===== ONBOARDING ===== */
+#screen-welcome {
+  background: linear-gradient(160deg, #e8f9e2 0%, #d0f0ff 100%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.welcome-logo {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--green-dark);
+  letter-spacing: -2px;
+  margin-bottom: 0.2rem;
+}
+.welcome-logo span { color: var(--orange); }
+.welcome-tagline {
+  font-size: 1.1rem;
+  color: var(--gray-dark);
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+.worm-hero {
+  width: 140px;
+  margin: 0 auto 2rem;
+  animation: worm-bounce 1.5s ease-in-out infinite;
+}
+@keyframes worm-bounce {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-10px) rotate(3deg); }
+}
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.btn:active { transform: translateY(2px); }
+.btn-green {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--green-dark);
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 1rem;
+}
+.btn-green:active { box-shadow: 0 2px 0 var(--green-dark); }
+.btn-outline {
+  background: transparent;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  box-shadow: none;
+  width: 100%;
+  max-width: 340px;
+}
+.btn-blue {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--blue-dark);
+  width: 100%;
+  max-width: 340px;
+}
+.btn-blue:active { box-shadow: 0 2px 0 var(--blue-dark); }
+.btn-red {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 4px 0 #c33;
+  width: 100%;
+  max-width: 340px;
+}
+.btn-gray {
+  background: var(--gray-light);
+  color: var(--gray-dark);
+  box-shadow: 0 4px 0 #ccc;
+  width: 100%;
+  max-width: 340px;
+}
+
+/* ===== REGISTER ===== */
+#screen-register {
+  background: linear-gradient(160deg, #e8f9e2 0%, #d0f0ff 100%);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.register-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  text-align: center;
+}
+.register-card h2 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+.register-card p {
+  color: var(--gray-dark);
+  font-size: 0.92rem;
+  margin-bottom: 1.5rem;
+}
+.form-group { margin-bottom: 1rem; text-align: left; }
+.form-group label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--gray-dark);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  color: var(--text);
+}
+.form-group input:focus { border-color: var(--blue); }
+.lang-select {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.lang-btn {
+  flex: 1;
+  padding: 0.8rem 0.5rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.15s;
+  color: var(--text);
+}
+.lang-btn.selected {
+  border-color: var(--blue);
+  background: #e8f7ff;
+  color: var(--blue-dark);
+}
+.lang-flag { font-size: 1.8rem; display: block; margin-bottom: 0.2rem; }
+.worm-mini { width: 60px; margin: 0 auto 1rem; }
+
+/* ===== MAIN APP ===== */
+#screen-home { background: var(--gray-bg); }
+.topbar {
+  background: white;
+  border-bottom: 2px solid var(--gray-light);
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-logo {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--green-dark);
+  letter-spacing: -1px;
+}
+.topbar-logo span { color: var(--orange); }
+.topbar-stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.stat-pill .icon { font-size: 1.2rem; }
+.streak-pill { color: var(--orange); }
+.xp-pill { color: var(--purple); }
+.heart-pill { color: var(--red); }
+.death-pill { color: #555; }  /* стиль для счётчика смертей */
+.home-content { padding: 1.5rem 1rem; max-width: 480px; margin: 0 auto; }
+.greeting-box {
+  background: white;
+  border-radius: 16px;
+  padding: 1.2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.greeting-text h3 { font-size: 1rem; font-weight: 900; }
+.greeting-text p { font-size: 0.85rem; color: var(--gray-dark); margin-top: 0.2rem; }
+.worm-greeting { width: 60px; flex-shrink: 0; }
+
+/* SECTION HEADERS */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray-mid);
+  margin-bottom: 0.8rem;
+  padding-left: 0.2rem;
+}
+
+/* PATH / LESSON NODES */
+.lesson-path {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-bottom: 2rem;
+}
+.path-unit {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.unit-header {
+  background: linear-gradient(90deg, #58CC02, #46a302);
+  border-radius: 14px;
+  padding: 0.9rem 1.2rem;
+  color: white;
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.unit-header-locked {
+  background: linear-gradient(90deg, #afafaf, #888);
+}
+.lesson-nodes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  position: relative;
+}
+.lesson-node {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  border: 4px solid transparent;
+  transition: transform 0.15s;
+  position: relative;
+}
+.lesson-node:hover { transform: scale(1.08); }
+.lesson-node.complete {
+  background: var(--green);
+  border-color: var(--green-dark);
+  box-shadow: 0 4px 0 var(--green-dark);
+}
+.lesson-node.active {
+  background: var(--blue);
+  border-color: var(--blue-dark);
+  box-shadow: 0 4px 0 var(--blue-dark);
+  animation: pulse-node 1.8s ease-in-out infinite;
+}
+.lesson-node.locked {
+  background: var(--gray-light);
+  border-color: #ccc;
+  box-shadow: 0 4px 0 #ccc;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+@keyframes pulse-node {
+  0%, 100% { box-shadow: 0 4px 0 var(--blue-dark), 0 0 0 0 rgba(28,176,246,0.4); }
+  50% { box-shadow: 0 4px 0 var(--blue-dark), 0 0 0 10px rgba(28,176,246,0); }
+}
+.node-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gray-dark);
+  margin-top: 0.3rem;
+  text-align: center;
+  max-width: 90px;
+}
+.node-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.path-row {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 3rem;
+}
+.path-row.offset { margin-left: 60px; }
+.path-row.offset-right { margin-right: 60px; }
+
+/* ===== LESSON SCREEN ===== */
+#screen-lesson {
+  background: var(--gray-bg);
+}
+.lesson-top {
+  background: white;
+  padding: 1rem 1.2rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 2px solid var(--gray-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--gray-mid);
+  padding: 0.2rem 0.5rem;
+  line-height: 1;
+  font-weight: 900;
+}
+.close-btn:hover { color: var(--text); }
+.progress-bar-wrap {
+  flex: 1;
+  background: var(--gray-light);
+  border-radius: 8px;
+  height: 14px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 8px;
+  transition: width 0.4s ease;
+}
+.hearts-display {
+  display: flex;
+  gap: 3px;
+  font-size: 1.3rem;
+}
+.lesson-body {
+  padding: 2rem 1.2rem;
+  max-width: 560px;
+  margin: 0 auto;
+  flex: 1;
+}
+.lesson-type-badge {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green-dark);
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.2rem;
+}
+.lesson-question {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.lesson-subtext {
+  font-size: 0.92rem;
+  color: var(--gray-dark);
+  margin-bottom: 1.5rem;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.option-btn {
+  padding: 0.9rem 0.75rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 12px;
+  background: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.12s;
+  color: var(--text);
+  line-height: 1.3;
+  box-shadow: 0 2px 0 var(--gray-light);
+}
+.option-btn:hover:not(.disabled) {
+  border-color: var(--blue);
+  background: #e8f7ff;
+  transform: translateY(-1px);
+}
+.option-btn.selected {
+  border-color: var(--blue);
+  background: #e8f7ff;
+  color: var(--blue-dark);
+  box-shadow: 0 2px 0 var(--blue-dark);
+}
+.option-btn.correct {
+  border-color: var(--green);
+  background: var(--green-light);
+  color: var(--green-dark);
+  box-shadow: 0 2px 0 var(--green-dark);
+}
+.option-btn.wrong {
+  border-color: var(--red);
+  background: #ffe8e8;
+  color: #c33;
+  box-shadow: 0 2px 0 #c33;
+}
+.option-btn.disabled { cursor: not-allowed; }
+
+/* Translate exercise */
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.word-chip {
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 10px;
+  background: white;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.12s;
+  box-shadow: 0 2px 0 var(--gray-light);
+  color: var(--text);
+}
+.word-chip:hover { border-color: var(--blue); background: #e8f7ff; }
+.word-chip.used { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.answer-zone {
+  min-height: 56px;
+  border: 2px dashed var(--gray-light);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: white;
+  cursor: pointer;
+}
+.answer-zone.has-answer { border-color: var(--blue); border-style: solid; }
+.answer-chip {
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--blue);
+  border-radius: 8px;
+  background: #e8f7ff;
+  color: var(--blue-dark);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.answer-chip:hover { background: #d0efff; }
+.answer-zone.correct { border-color: var(--green); border-style: solid; background: var(--green-light); }
+.answer-zone.wrong { border-color: var(--red); border-style: solid; background: #ffe8e8; }
+
+/* Worm mascot speech */
+.worm-speech-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+}
+.worm-speech-worm { width: 56px; flex-shrink: 0; }
+.speech-bubble {
+  background: white;
+  border: 2px solid var(--gray-light);
+  border-radius: 16px 16px 16px 4px;
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+  line-height: 1.4;
+}
+
+/* Feedback bar */
+.feedback-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.2rem 1.5rem 2rem;
+  display: none;
+  z-index: 200;
+}
+.feedback-bar.correct { background: var(--green-light); border-top: 3px solid var(--green); }
+.feedback-bar.wrong { background: #ffe8e8; border-top: 3px solid var(--red); }
+.feedback-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.feedback-text h4 { font-weight: 900; font-size: 1rem; }
+.feedback-text p { font-size: 0.88rem; margin-top: 0.2rem; }
+.feedback-bar.correct .feedback-text h4 { color: var(--green-dark); }
+.feedback-bar.wrong .feedback-text h4 { color: #c33; }
+.feedback-continue {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.feedback-bar.correct .feedback-continue { background: var(--green); color: white; }
+.feedback-bar.wrong .feedback-continue { background: var(--red); color: white; }
+
+/* Check button */
+.check-btn {
+  width: 100%;
+  max-width: 560px;
+  display: block;
+  margin: 0 auto 6rem;
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: none;
+  background: var(--gray-light);
+  color: var(--gray-mid);
+  transition: all 0.15s;
+}
+.check-btn.ready {
+  background: var(--green);
+  color: white;
+  box-shadow: 0 4px 0 var(--green-dark);
+}
+.check-btn.ready:active { box-shadow: 0 2px 0 var(--green-dark); transform: translateY(2px); }
+
+/* ===== RESULT SCREEN ===== */
+#screen-result {
+  background: linear-gradient(160deg, #d7f7b0 0%, #c6f0ff 100%);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.result-worm { width: 120px; margin: 0 auto 1.5rem; animation: worm-bounce 1.5s ease-in-out infinite; }
+.result-title { font-size: 2rem; font-weight: 900; color: var(--green-dark); margin-bottom: 0.3rem; }
+.result-subtitle { color: var(--gray-dark); font-size: 1rem; margin-bottom: 2rem; }
+.result-stats {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.result-stat {
+  background: white;
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  min-width: 90px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.result-stat-icon { font-size: 1.5rem; }
+.result-stat-val { font-size: 1.4rem; font-weight: 900; margin: 0.2rem 0; }
+.result-stat-label { font-size: 0.75rem; color: var(--gray-dark); font-weight: 700; }
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.modal-overlay.open { display: flex; }
+.modal-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.modal-card h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.5rem; }
+.modal-card p { font-size: 0.92rem; color: var(--gray-dark); margin-bottom: 1.5rem; line-height: 1.5; }
+.modal-worm { width: 70px; margin: 0 auto 1rem; }
+
+/* ===== LEADERBOARD / PROFILE / DICTIONARY / ALPHABET ===== */
+.bottom-nav {
+  background: white;
+  border-top: 2px solid var(--gray-light);
+  display: flex;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 90;
+  flex-wrap: wrap;
+}
+.nav-btn {
+  flex: 1;
+  padding: 0.7rem 0.5rem 0.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-mid);
+  transition: color 0.15s;
+}
+.nav-btn.active { color: var(--green); }
+.nav-btn-icon { font-size: 1.5rem; }
+
+/* SUB SCREENS */
+.sub-screen { display: none; }
+.sub-screen.active { display: block; }
+
+/* PROFILE */
+.profile-header {
+  background: linear-gradient(160deg, #d7f7b0, #b3e8ff);
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+}
+.profile-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: var(--green);
+  margin: 0 auto 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: white;
+  border: 4px solid white;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.profile-name { font-size: 1.4rem; font-weight: 900; margin-bottom: 0.2rem; }
+.profile-flag { font-size: 0.9rem; color: var(--gray-dark); }
+.profile-stats {
+  display: flex;
+  gap: 0;
+  background: white;
+  border-radius: 14px;
+  margin: 1rem 1.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.profile-stat {
+  flex: 1;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  border-right: 1px solid var(--gray-light);
+}
+.profile-stat:last-child { border-right: none; }
+.profile-stat-val { font-size: 1.3rem; font-weight: 900; }
+.profile-stat-label { font-size: 0.7rem; color: var(--gray-dark); font-weight: 700; text-transform: uppercase; margin-top: 0.1rem; }
+.profile-body { padding: 1.5rem; }
+
+/* LEADERBOARD */
+.leader-list { padding: 1rem 1.2rem; }
+.leader-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.leader-rank {
+  font-size: 1rem;
+  font-weight: 900;
+  width: 28px;
+  text-align: center;
+  color: var(--gray-mid);
+}
+.leader-rank.gold { color: var(--yellow); }
+.leader-rank.silver { color: #aaa; }
+.leader-rank.bronze { color: #cd7f32; }
+.leader-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--gray-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  font-weight: 900;
+}
+.leader-name { flex: 1; font-weight: 700; font-size: 0.95rem; }
+.leader-name small { display: block; font-size: 0.75rem; color: var(--gray-dark); font-weight: 400; }
+.leader-xp { font-weight: 900; color: var(--purple); font-size: 0.95rem; }
+.leader-item.me { background: #e8f7ff; border: 2px solid var(--blue); }
+
+/* DICTIONARY & ALPHABET */
+.dict-card, .alphabet-grid {
+  background: white;
+  border-radius: 20px;
+  margin: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.dict-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1.2rem;
+  border-bottom: 1px solid var(--gray-light);
+  font-weight: 600;
+}
+.dict-word { font-weight: 800; color: var(--blue-dark); }
+.dict-trans { color: var(--gray-dark); }
+.alphabet-letter {
+  display: inline-block;
+  width: calc(20% - 0.8rem);
+  margin: 0.4rem;
+  padding: 0.9rem 0;
+  background: var(--green-light);
+  border-radius: 14px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: var(--green-dark);
+  box-shadow: 0 2px 0 var(--gray-light);
+}
+.alphabet-letter small {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--gray-dark);
+  font-weight: normal;
+}
+.alphabet-grid {
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Page headers */
+.page-header {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid var(--gray-light);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+.shake { animation: shake 0.4s ease; }
+
+/* Streak popup */
+.streak-popup {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  z-index: 600;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  min-width: 240px;
+}
+.streak-popup.show { transform: translate(-50%, -50%) scale(1); }
+.streak-fire { font-size: 4rem; animation: worm-bounce 1s ease infinite; }
+
+/* Responsive */
+@media (max-width: 400px) {
+  .options-grid { grid-template-columns: 1fr; }
+  .result-stats { flex-direction: column; align-items: center; }
+  .alphabet-letter { width: calc(33% - 0.8rem); }
+  .bottom-nav { flex-wrap: wrap; }
+  .nav-btn { min-width: 20%; }
+}
+</style>
+</head>
+<body>
+
+<!-- WELCOME SCREEN -->
+<div id="screen-welcome" class="screen active">
+  <div style="margin-bottom:1rem;"><svg class="worm-hero" viewBox="0 0 120 140"><ellipse cx="60" cy="110" rx="28" ry="18" fill="#8BC34A" stroke="#689F38" stroke-width="2"/><ellipse cx="60" cy="92" rx="26" ry="16" fill="#9CCC65" stroke="#7CB342" stroke-width="2"/><ellipse cx="60" cy="76" rx="24" ry="15" fill="#AED581" stroke="#8BC34A" stroke-width="2"/><ellipse cx="60" cy="54" rx="28" ry="26" fill="#9CCC65" stroke="#689F38" stroke-width="2.5"/><circle cx="50" cy="48" r="9" fill="white" stroke="#689F38" stroke-width="1.5"/><circle cx="70" cy="48" r="9" fill="white" stroke="#689F38" stroke-width="1.5"/><circle cx="52" cy="48" r="5" fill="#333"/><circle cx="72" cy="48" r="5" fill="#333"/><circle cx="54" cy="46" r="2" fill="white"/><circle cx="74" cy="46" r="2" fill="white"/><path d="M 48 62 Q 60 72 72 62" fill="none" stroke="#689F38" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="44" cy="59" rx="6" ry="4" fill="#EF9A9A" opacity="0.6"/><ellipse cx="76" cy="59" rx="6" ry="4" fill="#EF9A9A" opacity="0.6"/><line x1="52" y1="30" x2="44" y2="12" stroke="#689F38" stroke-width="2.5" stroke-linecap="round"/><circle cx="44" cy="10" r="4" fill="#FF7043"/><line x1="68" y1="30" x2="76" y2="12" stroke="#689F38" stroke-width="2.5" stroke-linecap="round"/><circle cx="76" cy="10" r="4" fill="#FF7043"/><polygon points="38,30 45,18 52,28 60,14 68,28 75,18 82,30" fill="#FFC107" stroke="#FF8F00" stroke-width="1.5"/></svg></div>
+  <div class="welcome-logo">Undo<span>lindo</span></div>
+  <div class="welcome-tagline">Учи язык с червяком. Да, именно с червяком.</div>
+  <button class="btn btn-green" onclick="showScreen('register')">Начать (червяк ждёт)</button>
+  <button class="btn btn-outline" onclick="tryLogin()">У меня уже есть аккаунт</button>
+  <p style="font-size:0.78rem; color:var(--gray-mid); margin-top:1.5rem;">Undolindo™ — больше(меньше) уроков, чем у совы, и меньше пафоса.</p>
+</div>
+
+<!-- REGISTER SCREEN -->
+<div id="screen-register" class="screen"><div style="background:linear-gradient(160deg,#e8f9e2,#d0f0ff); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem;"><div class="register-card"><svg class="worm-mini" viewBox="0 0 80 80"><ellipse cx="40" cy="60" rx="18" ry="12" fill="#8BC34A" stroke="#689F38" stroke-width="1.5"/><ellipse cx="40" cy="38" rx="22" ry="20" fill="#9CCC65" stroke="#689F38" stroke-width="2"/><circle cx="32" cy="32" r="7" fill="white" stroke="#689F38" stroke-width="1"/><circle cx="48" cy="32" r="7" fill="white" stroke="#689F38" stroke-width="1"/><circle cx="33.5" cy="32" r="4" fill="#333"/><circle cx="49.5" cy="32" r="4" fill="#333"/><circle cx="34.5" cy="31" r="1.5" fill="white"/><circle cx="50.5" cy="31" r="1.5" fill="white"/><path d="M 30 46 Q 40 53 50 46" fill="none" stroke="#689F38" stroke-width="2" stroke-linecap="round"/></svg><h2>Привет, будущий лингвист!</h2><p>Undo очень рад тебя видеть. Он три часа ждал. Не подводи его.</p><div class="form-group"><label>Твоё имя</label><input type="text" id="reg-name" placeholder="Как тебя зовут?" maxlength="30"/></div><div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="твой@email.com"/></div><div class="form-group"><label>Пароль</label><input type="password" id="reg-password" placeholder="Лучше, чем «12345»"/></div><div style="margin-bottom:0.8rem;"><div class="section-label" style="text-align:left;">Родной язык</div><div class="lang-select"><div class="lang-btn selected" id="lang-ru"><span class="lang-flag">🇷🇺</span> Русский</div></div></div><div style="margin-bottom:1.5rem;"><div class="section-label" style="text-align:left;">Учу язык</div><div class="lang-select"><div class="lang-btn selected" id="lang-en"><span class="lang-flag">🇬🇧</span> Английский</div></div><p style="font-size:0.75rem; color:var(--gray-mid); text-align:left;">* Другие языки добавим, когда Undo научится их произносить</p></div><button class="btn btn-green" onclick="doRegister()">Создать аккаунт</button><button class="btn btn-outline" style="margin-top:0.5rem;" onclick="showScreen('welcome')">Назад</button></div></div></div>
+
+<!-- HOME SCREEN -->
+<div id="screen-home" class="screen">
+  <div class="topbar"><div class="topbar-logo">Undo<span>lindo</span></div><div class="topbar-stats"><div class="stat-pill streak-pill"><span class="icon">🔥</span><span id="stat-streak">0</span></div><div class="stat-pill xp-pill"><span class="icon">⚡</span><span id="stat-xp">0</span></div><div class="stat-pill heart-pill"><span class="icon">❤️</span><span id="stat-hearts">5</span></div><div class="stat-pill death-pill"><span class="icon">💀</span><span id="stat-deaths">0</span></div></div></div>
+  
+  <div id="sub-learn" class="sub-screen active" style="padding-bottom:80px;"><div class="home-content"><div class="greeting-box"><svg class="worm-greeting" viewBox="0 0 80 80"><ellipse cx="40" cy="60" rx="18" ry="12" fill="#8BC34A"/><ellipse cx="40" cy="38" rx="22" ry="20" fill="#9CCC65"/><circle cx="32" cy="32" r="7" fill="white"/><circle cx="48" cy="32" r="7" fill="white"/><circle cx="33.5" cy="32" r="4" fill="#333"/><circle cx="49.5" cy="32" r="4" fill="#333"/><circle cx="34.5" cy="31" r="1.5" fill="white"/><circle cx="50.5" cy="31" r="1.5" fill="white"/><path d="M 30 46 Q 40 53 50 46" fill="none" stroke="#689F38" stroke-width="2"/></svg><div class="greeting-text"><h3 id="greeting-hello">Привет! 👋</h3><p id="greeting-sub">Продолжай учить английский!</p></div></div><div class="section-label">Путь обучения 🐛</div><div class="lesson-path" id="lesson-path"></div></div></div>
+  
+  <div id="sub-dictionary" class="sub-screen" style="padding-bottom:80px;"><div class="page-header">📖 Словарь Undo</div><div class="dict-card" id="dictionary-list"></div><div style="margin:1rem; font-size:0.8rem; text-align:center; color:var(--gray-dark);">«Undo иногда путает перевод, но старается изо всех червячьих сил. И да, он выучил все эти слова сам.»</div></div>
+  
+  <div id="sub-alphabet" class="sub-screen" style="padding-bottom:80px;"><div class="page-header">🔤 Английский алфавит</div><div class="alphabet-grid" id="alphabet-grid"></div><div style="margin:1rem; font-size:0.8rem; text-align:center; color:var(--gray-dark);">«Буквы — как сегменты Undo. Их много, и все важны. Все 26 — как 26 причин не сдаваться.»</div></div>
+  
+  <div id="sub-leaders" class="sub-screen" style="padding-bottom:80px;"><div class="page-header">🏆 Таблица лидеров</div><div style="padding:0.8rem 1.2rem; background:#fff7e6;"><p style="font-size:0.82rem;"><b>Лига: Бронзовый Червяк 🐛</b> — «Все с чего-то начинали. Undo начал с листика.»</p></div><div class="leader-list" id="leader-list"></div></div>
+  
+  <div id="sub-profile" class="sub-screen" style="padding-bottom:80px;"><div class="profile-header"><div class="profile-avatar" id="profile-avatar">?</div><div class="profile-name" id="profile-name">Имя</div><div class="profile-flag">🇷🇺 Русский → 🇬🇧 Английский</div><div class="profile-stats"><div class="profile-stat"><div class="profile-stat-val" id="pstat-days">0</div><div class="profile-stat-label">Дней подряд</div></div><div class="profile-stat"><div class="profile-stat-val" id="pstat-xp">0</div><div class="profile-stat-label">XP всего</div></div><div class="profile-stat"><div class="profile-stat-val" id="pstat-lessons">0</div><div class="profile-stat-label">Уроков</div></div><div class="profile-stat"><div class="profile-stat-val" id="pstat-deaths">0</div><div class="profile-stat-label">Смертей</div></div></div></div><div class="profile-body"><div class="section-label">Достижения</div><div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;" id="achievements-grid"></div><div class="section-label" style="margin-top:1.5rem;">Настройки</div><div style="background:white; border-radius:14px; overflow:hidden;"><div style="padding:1rem; border-bottom:1px solid var(--gray-light); display:flex; justify-content:space-between;"><span style="font-weight:700;">🔔 Уведомления</span><span style="font-size:0.8rem;">Undo будет тебя беспокоить</span></div><div style="padding:1rem; border-bottom:1px solid var(--gray-light); display:flex; justify-content:space-between;"><span style="font-weight:700;">🎵 Звуки</span><span style="font-size:0.8rem; color:var(--green);">Вкл</span></div><div style="padding:1rem; cursor:pointer;" onclick="logout()"><span style="font-weight:700; color:var(--red);">Выйти из аккаунта</span></div></div><p style="text-align:center; font-size:0.75rem; margin-top:2rem;">Undolindo v3.0🐛©</p></div></div>
+  
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nav-learn" onclick="switchTab('learn')"><span class="nav-btn-icon">🏠</span> Учиться</button>
+    <button class="nav-btn" id="nav-dictionary" onclick="switchTab('dictionary')"><span class="nav-btn-icon">📖</span> Словарь</button>
+    <button class="nav-btn" id="nav-alphabet" onclick="switchTab('alphabet')"><span class="nav-btn-icon">🔤</span> Алфавит</button>
+    <button class="nav-btn" id="nav-leaders" onclick="switchTab('leaders')"><span class="nav-btn-icon">🏆</span> Рейтинг</button>
+    <button class="nav-btn" id="nav-profile" onclick="switchTab('profile')"><span class="nav-btn-icon">👤</span> Профиль</button>
+  </nav>
+</div>
+
+<!-- LESSON SCREEN -->
+<div id="screen-lesson" class="screen">
+  <div class="lesson-top"><button class="close-btn" onclick="showQuitModal()">✕</button><div class="progress-bar-wrap"><div class="progress-bar-fill" id="lesson-progress"></div></div><div class="hearts-display" id="lesson-hearts">❤️❤️❤️❤️❤️</div></div>
+  <div class="lesson-body" id="lesson-body"></div>
+  <button class="check-btn" id="check-btn" onclick="checkAnswer()">Проверить</button>
+  <div class="feedback-bar" id="feedback-bar"><div class="feedback-inner"><div class="feedback-text"><h4 id="feedback-title">Правильно!</h4><p id="feedback-detail"></p></div><button class="feedback-continue" onclick="nextQuestion()">Далее</button></div></div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="screen-result" class="screen"><div style="max-width:480px; margin:0 auto; text-align:center;"><svg class="result-worm" viewBox="0 0 120 140"><ellipse cx="60" cy="110" rx="28" ry="18" fill="#8BC34A"/><ellipse cx="60" cy="92" rx="26" ry="16" fill="#9CCC65"/><ellipse cx="60" cy="76" rx="24" ry="15" fill="#AED581"/><ellipse cx="60" cy="54" rx="28" ry="26" fill="#9CCC65"/><circle cx="50" cy="48" r="9" fill="white"/><circle cx="70" cy="48" r="9" fill="white"/><circle cx="52" cy="48" r="5" fill="#333"/><circle cx="72" cy="48" r="5" fill="#333"/><circle cx="54" cy="46" r="2" fill="white"/><circle cx="74" cy="46" r="2" fill="white"/><path d="M 46 64 Q 60 76 74 64" fill="none" stroke="#689F38" stroke-width="2.5"/></svg><div class="result-title" id="result-title">Урок завершён!</div><div class="result-subtitle" id="result-subtitle"></div><div class="result-stats"><div class="result-stat"><div class="result-stat-icon">⚡</div><div class="result-stat-val" id="result-xp">+15</div><div class="result-stat-label">XP</div></div><div class="result-stat"><div class="result-stat-icon">✅</div><div class="result-stat-val" id="result-correct">0/0</div><div class="result-stat-label">Верно</div></div><div class="result-stat"><div class="result-stat-icon">⏱</div><div class="result-stat-val" id="result-time">0с</div><div class="result-stat-label">Время</div></div></div><button class="btn btn-green" onclick="finishLesson()">Продолжить</button><button class="btn btn-gray" onclick="retryLesson()">Повторить</button><p id="result-quote"></p></div></div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-quit"><div class="modal-card"><svg class="modal-worm" viewBox="0 0 80 80"><ellipse cx="40" cy="60" rx="18" ry="12" fill="#8BC34A"/><ellipse cx="40" cy="38" rx="22" ry="20" fill="#9CCC65"/><circle cx="32" cy="32" r="7" fill="white"/><circle cx="48" cy="32" r="7" fill="white"/><circle cx="33.5" cy="32" r="4" fill="#333"/><circle cx="49.5" cy="32" r="4" fill="#333"/><path d="M 34 46 Q 40 42 46 46" fill="none" stroke="#689F38" stroke-width="2"/><line x1="29" y1="26" x2="36" y2="28" stroke="#689F38" stroke-width="2"/><line x1="44" y1="28" x2="51" y2="26" stroke="#689F38" stroke-width="2"/></svg><h3>Уходишь уже? 😢</h3><p>Undo будет очень скучать. Он маленький. Он беспомощный. Он просто червяк.</p><button class="btn btn-red" onclick="quitLesson()">Уйти (предать Undo)</button><button class="btn btn-green" onclick="closeModal('modal-quit')">Остаться</button></div></div>
+<div class="modal-overlay" id="modal-no-hearts"><div class="modal-card"><div style="font-size:3rem;">💔</div><h3>Жизни кончились!</h3><p>Undo в шоке. Он даже не знает, что сказать. Подожди немного — сердечки восстановятся.<br><em>«Ошибки — это просто уроки. Платные. Но Undo даёт скидку.»</em></p><button class="btn btn-green" onclick="refillHearts()">Продолжить (восстановить)</button></div></div>
+<div class="streak-popup" id="streak-popup"><div class="streak-fire">🔥</div><div style="font-size:1.5rem; font-weight:900;" id="streak-num">3 дня!</div><div style="color:var(--gray-dark);">Undo очень доволен тобой</div><button class="btn btn-green" style="background:var(--orange); color:white;" onclick="closeStreak()">Ура!</button></div>
+
+<script>
+// ===== STATE =====
+let state = { user: null, streak: 0, xp: 0, hearts: 5, deaths: 0, lessonsCompleted: 0, lessonProgress: new Array(150).fill(0), lastActivityDate: null };
+
+function saveState() { localStorage.setItem('undolindo_state', JSON.stringify(state)); }
+function loadState() { 
+  const s = localStorage.getItem('undolindo_state'); 
+  if(s) { 
+    state = JSON.parse(s); 
+    if(state.deaths === undefined) state.deaths = 0;
+    if(state.lastActivityDate === undefined) state.lastActivityDate = null;
+    return true; 
+  } 
+  return false; 
+}
+
+// Проверка и обновление серии (ударный режим)
+function updateStreakOnActivity() {
+  const today = new Date().toDateString();
+  const lastActive = state.lastActivityDate;
+  if (!lastActive) {
+    state.streak = 1;
+  } else {
+    const lastDate = new Date(lastActive);
+    const currentDate = new Date(today);
+    const diffDays = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) {
+      // уже сегодня активность, ничего не меняем
+      return;
+    } else if (diffDays === 1) {
+      state.streak += 1;
+    } else {
+      state.streak = 1; // сброс серии если пропустили больше дня
+    }
+  }
+  state.lastActivityDate = today;
+  saveState();
+}
+
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById('screen-'+id).classList.add('active'); }
+window.onload = function() { if(loadState() && state.user) { initApp(); showScreen('home'); } else showScreen('welcome'); };
+function tryLogin() { if(loadState() && state.user) { initApp(); showScreen('home'); } else alert('Аккаунт не найден(это твоя проблема). Зарегистрируйся!'); }
+function doRegister() { let name = document.getElementById('reg-name').value.trim(); if(!name) { alert('Undo хочет знать твоё имя!'); return; } state.user = { name }; state.streak=1; state.xp=0; state.hearts=5; state.deaths=0; state.lessonsCompleted=0; state.lessonProgress.fill(0); state.lastActivityDate = new Date().toDateString(); saveState(); initApp(); showScreen('home'); setTimeout(()=>showStreakPopup(1,'Первый день!'),500); }
+function logout() { if(confirm('Ты точно хочешь выйти? Undo будет скучать.')) { localStorage.removeItem('undolindo_state'); location.reload(); } }
+function initApp() { updateTopStats(); renderPath(); renderLeaderboard(); renderProfile(); updateGreeting(); renderDictionary(); renderAlphabet(); }
+function updateTopStats() { document.getElementById('stat-streak').textContent=state.streak; document.getElementById('stat-xp').textContent=state.xp; document.getElementById('stat-hearts').textContent=state.hearts; document.getElementById('stat-deaths').textContent=state.deaths; }
+function updateGreeting() { let hour=new Date().getHours(); let greet=hour<12?'Доброе утро!':hour<17?'Добрый день!':'Добрый вечер!'; document.getElementById('greeting-hello').textContent=`${greet} ${state.user?.name||'друг'} 👋`; let subs=['Undo уже разминается. Не отставай!','Сегодня хороший день учить английский.','Порция английского не повредит.','Undo верит в тебя. Иногда.']; document.getElementById('greeting-sub').textContent=subs[Math.floor(Math.random()*subs.length)]; }
+
+// ===== 10 ЮНИТОВ ПО 5 УРОКОВ = 50 УРОКОВ =====
+const unitNames = [
+  "Основы", "Числа и счёт", "Цвета и формы", "Еда и напитки", "Семья и дом",
+  "Животные", "Природа и погода", "Путешествия", "Работа и учёба", "Разговорные фразы",
+  "Время и даты", "Одежда", "Тело и здоровье", "Спорт и хобби", "Город и транспорт",
+  "Технологии", "Эмоции и чувства", "Покупки", "Ресторан и кафе", "Грамматика 1",
+  "Дом и мебель", "Профессии", "Школа и образование", "Искусство и культура", "Политика и общество",
+  "Наука", "Бизнес", "Медицина", "Грамматика 2", "Разговорный английский"
+];
+const unitIcons = [
+  "🌱", "🔢", "🎨", "🍎", "🏠", "🐕", "🌿", "✈️", "💼", "💬",
+  "⏰", "👕", "🩺", "⚽", "🏛️", "💻", "😊", "🛍️", "🍽️", "📚",
+  "🏡", "👨‍⚕️", "🎓", "🎭", "🏛️", "🔬", "💼", "🏥", "📖", "🗣️"
+];
+const lessonTypes = [
+  "basics","numbers","colors","food","family","animals","nature","travel","work","phrases",
+  "time","clothes","body","sports","city","tech","emotions","shopping","restaurant","grammar1",
+  "house","professions","school","art","society","science","business","medicine","grammar2","advanced"
+];
+
+// Генерация вопросов для каждого типа (обширная база)
+const questionBank = {
+  basics: [
+    {type:"translate_word",question:"Как переводится «Привет»?",options:["Hello","Goodbye","Please","Sorry"],correct:0,hint:"Самое популярное слово."},
+    {type:"translate_word",question:"Как переводится «Спасибо»?",options:["Please","Thank you","Excuse me","Sorry"],correct:1,hint:"Благодарность."},
+    {type:"translate_word",question:"Что значит «Goodbye»?",options:["Привет","Пожалуйста","Пока","Извините"],correct:2,hint:"Прощание."},
+    {type:"word_order",question:"Составь: «Доброе утро»",words:["morning","Good","evening","Hello"],correct:["Good","morning"],hint:"Good morning."},
+    {type:"translate_word",question:"«Пожалуйста» по-английски?",options:["Yes","No","Please","Maybe"],correct:2,hint:"Волшебное слово."},
+    {type:"translate_word",question:"«My name is» — это?",options:["Я люблю","Меня зовут","Я хочу","Моё имя"],correct:1,hint:"Представление."},
+    {type:"translate_word",question:"Как сказать «Да»?",options:["Yes","No","OK","Yep"],correct:0,hint:"Согласие."},
+    {type:"translate_word",question:"«Нет» по-английски?",options:["Not","No","None","Never"],correct:1,hint:"Отрицание."},
+    {type:"word_order",question:"Составь: «Как дела?»",words:["you","How","are","what"],correct:["How","are","you"],hint:"How are you?"},
+    {type:"translate_word",question:"«I love you» — это?",options:["Я люблю тебя","Я ненавижу","Я знаю","Привет"],correct:0,hint:"Признание."},
+  ],
+  numbers: [
+    {type:"translate_word",question:"«Один» по-английски?",options:["Two","One","Three","Zero"],correct:1},
+    {type:"translate_word",question:"«Five» — это?",options:["Четыре","Шесть","Пять","Семь"],correct:2},
+    {type:"translate_word",question:"«Десять»?",options:["Eight","Twelve","Ten","Eleven"],correct:2},
+    {type:"word_order",question:"Составь: «Три кошки»",words:["cats","Three","dogs","One"],correct:["Three","cats"],hint:"Число + существительное."},
+    {type:"translate_word",question:"«Hundred» — сколько?",options:["10","100","1000","50"],correct:1},
+    {type:"translate_word",question:"«Twenty» — это?",options:["12","20","30","2"],correct:1},
+    {type:"translate_word",question:"«First» — это?",options:["Второй","Первый","Третий","Последний"],correct:1},
+    {type:"translate_word",question:"«Second» — какой по счёту?",options:["Первый","Третий","Второй","Четвёртый"],correct:2},
+    {type:"translate_word",question:"«Million» — это?",options:["Тысяча","Миллион","Миллиард","Сто"],correct:1},
+    {type:"word_order",question:"Составь: «Сто долларов»",words:["dollars","hundred","A","money"],correct:["A","hundred","dollars"],hint:"A hundred dollars."},
+  ],
+  colors: [
+    {type:"translate_word",question:"«Red» — это?",options:["Синий","Красный","Зелёный","Жёлтый"],correct:1},
+    {type:"translate_word",question:"«Зелёный» по-английски?",options:["Blue","Yellow","Green","Purple"],correct:2},
+    {type:"translate_word",question:"«Yellow» — это?",options:["Оранжевый","Фиолетовый","Жёлтый","Белый"],correct:2},
+    {type:"word_order",question:"Составь: «Синяя птица»",words:["bird","Blue","sky","Green"],correct:["Blue","bird"],hint:"Blue bird."},
+    {type:"translate_word",question:"«White» — это?",options:["Чёрный","Белый","Серый","Коричневый"],correct:1},
+    {type:"translate_word",question:"«Black» — это?",options:["Белый","Синий","Чёрный","Красный"],correct:2},
+    {type:"translate_word",question:"«Purple» — какой цвет?",options:["Розовый","Фиолетовый","Голубой","Оранжевый"],correct:1},
+    {type:"translate_word",question:"«Brown» — это?",options:["Коричневый","Серый","Золотой","Серебряный"],correct:0},
+    {type:"word_order",question:"Составь: «Красная машина»",words:["car","red","blue","fast"],correct:["red","car"],hint:"Red car."},
+    {type:"translate_word",question:"«Pink» — это?",options:["Розовый","Чёрный","Белый","Оранжевый"],correct:0},
+  ],
+  food: [
+    {type:"translate_word",question:"«Apple» — это?",options:["Банан","Апельсин","Яблоко","Груша"],correct:2},
+    {type:"translate_word",question:"«Хлеб» по-английски?",options:["Milk","Bread","Water","Sugar"],correct:1},
+    {type:"translate_word",question:"«Water» — это?",options:["Сок","Чай","Вода","Молоко"],correct:2},
+    {type:"word_order",question:"Составь: «Я хочу кофе»",words:["want","I","coffee","tea"],correct:["I","want","coffee"],hint:"I want coffee."},
+    {type:"translate_word",question:"«Milk» — это?",options:["Сок","Вода","Молоко","Кефир"],correct:2},
+    {type:"translate_word",question:"«Meat» — это?",options:["Рыба","Мясо","Хлеб","Сыр"],correct:1},
+    {type:"translate_word",question:"«Fish» — это?",options:["Мясо","Курица","Рыба","Овощи"],correct:2},
+    {type:"translate_word",question:"«Egg» — это?",options:["Яйцо","Масло","Сахар","Соль"],correct:0},
+    {type:"word_order",question:"Составь: «Зелёное яблоко»",words:["apple","green","red","big"],correct:["green","apple"],hint:"Green apple."},
+    {type:"translate_word",question:"«Sugar» — это?",options:["Соль","Сахар","Мука","Масло"],correct:1},
+  ],
+  family: [
+    {type:"translate_word",question:"«Mother» — это?",options:["Отец","Мать","Брат","Сестра"],correct:1},
+    {type:"translate_word",question:"«Brother» — это?",options:["Сестра","Брат","Дядя","Тётя"],correct:1},
+    {type:"translate_word",question:"«Sister» — это?",options:["Брат","Мать","Сестра","Отец"],correct:2},
+    {type:"word_order",question:"Составь: «Моя семья»",words:["my","family","home","big"],correct:["my","family"],hint:"My family."},
+    {type:"translate_word",question:"«Father» — это?",options:["Мать","Отец","Сын","Дочь"],correct:1},
+    {type:"translate_word",question:"«Daughter» — это?",options:["Сын","Дочь","Бабушка","Дедушка"],correct:1},
+    {type:"translate_word",question:"«Grandmother» — это?",options:["Дедушка","Бабушка","Внук","Внучка"],correct:1},
+    {type:"translate_word",question:"«Uncle» — это?",options:["Тётя","Дядя","Кузен","Племянник"],correct:1},
+    {type:"word_order",question:"Составь: «Любящая мать»",words:["mother","loving","kind","good"],correct:["loving","mother"],hint:"Loving mother."},
+    {type:"translate_word",question:"«Parents» — это?",options:["Дети","Родители","Бабушка","Дедушка"],correct:1},
+  ],
+  animals: [
+    {type:"translate_word",question:"«Dog» — это?",options:["Кошка","Собака","Мышь","Птица"],correct:1},
+    {type:"translate_word",question:"«Cat» — это?",options:["Собака","Кошка","Крыса","Хомяк"],correct:1},
+    {type:"translate_word",question:"«Bird» — это?",options:["Рыба","Птица","Змея","Лягушка"],correct:1},
+    {type:"word_order",question:"Составь: «Чёрная кошка»",words:["cat","black","white","big"],correct:["black","cat"],hint:"Black cat."},
+    {type:"translate_word",question:"«Fish» — это?",options:["Птица","Рыба","Змея","Кролик"],correct:1},
+    {type:"translate_word",question:"«Horse» — это?",options:["Корова","Лошадь","Свинья","Овца"],correct:1},
+    {type:"translate_word",question:"«Mouse» — это?",options:["Крыса","Мышь","Хомяк","Кролик"],correct:1},
+    {type:"translate_word",question:"«Bear» — это?",options:["Волк","Медведь","Лиса","Олень"],correct:1},
+    {type:"word_order",question:"Составь: «Моя собака»",words:["dog","my","cat","pet"],correct:["my","dog"],hint:"My dog."},
+    {type:"translate_word",question:"«Elephant» — это?",options:["Жираф","Слон","Носорог","Бегемот"],correct:1},
+  ],
+  nature: [
+    {type:"translate_word",question:"«Sun» — это?",options:["Луна","Солнце","Звезда","Небо"],correct:1},
+    {type:"translate_word",question:"«Rain» — это?",options:["Снег","Дождь","Ветер","Туман"],correct:1},
+    {type:"translate_word",question:"«Snow» — это?",options:["Дождь","Снег","Град","Лёд"],correct:1},
+    {type:"word_order",question:"Составь: «Холодная зима»",words:["winter","cold","hot","summer"],correct:["cold","winter"],hint:"Cold winter."},
+    {type:"translate_word",question:"«Tree» — это?",options:["Цветок","Трава","Дерево","Куст"],correct:2},
+    {type:"translate_word",question:"«Flower» — это?",options:["Дерево","Цветок","Трава","Лист"],correct:1},
+    {type:"translate_word",question:"«Wind» — это?",options:["Дождь","Снег","Ветер","Шторм"],correct:2},
+    {type:"translate_word",question:"«Sky» — это?",options:["Земля","Небо","Космос","Облако"],correct:1},
+    {type:"word_order",question:"Составь: «Голубое небо»",words:["sky","blue","white","cloud"],correct:["blue","sky"],hint:"Blue sky."},
+    {type:"translate_word",question:"«Mountain» — это?",options:["Река","Озеро","Гора","Лес"],correct:2},
+  ],
+  travel: [
+    {type:"translate_word",question:"«Car» — это?",options:["Автобус","Поезд","Машина","Самолёт"],correct:2},
+    {type:"translate_word",question:"«Train» — это?",options:["Машина","Поезд","Самолёт","Корабль"],correct:1},
+    {type:"translate_word",question:"«Airport» — это?",options:["Вокзал","Аэропорт","Порт","Станция"],correct:1},
+    {type:"word_order",question:"Составь: «Новая машина»",words:["car","new","old","red"],correct:["new","car"],hint:"New car."},
+    {type:"translate_word",question:"«Ticket» — это?",options:["Паспорт","Билет","Визза","Деньги"],correct:1},
+    {type:"translate_word",question:"«Hotel» — это?",options:["Ресторан","Отель","Музей","Театр"],correct:1},
+    {type:"translate_word",question:"«Map» — это?",options:["Карта","Глобус","Компас","Навигатор"],correct:0},
+    {type:"translate_word",question:"«Suitcase» — это?",options:["Сумка","Рюкзак","Чемодан","Коробка"],correct:2},
+    {type:"word_order",question:"Составь: «Я люблю путешествовать»",words:["travel","love","I","to"],correct:["I","love","to","travel"],hint:"I love to travel."},
+    {type:"translate_word",question:"«Plane» — это?",options:["Поезд","Машина","Самолёт","Корабль"],correct:2},
+  ],
+  work: [
+    {type:"translate_word",question:"«Doctor» — это?",options:["Учитель","Врач","Инженер","Адвокат"],correct:1},
+    {type:"translate_word",question:"«Teacher» — это?",options:["Врач","Учитель","Студент","Директор"],correct:1},
+    {type:"translate_word",question:"«Office» — это?",options:["Завод","Магазин","Офис","Школа"],correct:2},
+    {type:"word_order",question:"Составь: «Хорошая работа»",words:["job","good","bad","work"],correct:["good","job"],hint:"Good job."},
+    {type:"translate_word",question:"«Student» — это?",options:["Учитель","Студент","Школьник","Выпускник"],correct:1},
+    {type:"translate_word",question:"«Money» — это?",options:["Работа","Деньги","Зарплата","Банк"],correct:1},
+    {type:"translate_word",question:"«Boss» — это?",options:["Коллега","Начальник","Сотрудник","Помощник"],correct:1},
+    {type:"translate_word",question:"«Meeting» — это?",options:["Обед","Встреча","Перерыв","Отпуск"],correct:1},
+    {type:"word_order",question:"Составь: «Умный студент»",words:["student","smart","good","young"],correct:["smart","student"],hint:"Smart student."},
+    {type:"translate_word",question:"«Career» — это?",options:["Работа","Карьера","Должность","Профессия"],correct:1},
+  ],
+  phrases: [
+    {type:"translate_word",question:"«Excuse me» — это?",options:["Извините","Спасибо","Пожалуйста","Привет"],correct:0},
+    {type:"translate_word",question:"«I'm sorry» — это?",options:["Я рад","Я зол","Извините","Спасибо"],correct:2},
+    {type:"translate_word",question:"«What's up?» — это?",options:["Как дела?","Что это?","Где?","Почему?"],correct:0},
+    {type:"word_order",question:"Составь: «Сколько это стоит?»",words:["much","How","is","this"],correct:["How","much","is","this"],hint:"How much is this?"},
+    {type:"translate_word",question:"«Where is the bathroom?» — это?",options:["Где кухня?","Где ванная?","Где спальня?","Где гостиная?"],correct:1},
+    {type:"translate_word",question:"«I don't understand» — это?",options:["Я понимаю","Я не понимаю","Я знаю","Я не знаю"],correct:1},
+    {type:"translate_word",question:"«Can you help me?» — это?",options:["Я помогу","Помогите мне","Ты поможешь?","Можешь помочь?"],correct:3},
+    {type:"translate_word",question:"«What time is it?» — это?",options:["Который час?","Когда?","Сколько времени?","Во сколько?"],correct:0},
+    {type:"word_order",question:"Составь: «С Рождеством!»",words:["Merry","Christmas","Happy","New"],correct:["Merry","Christmas"],hint:"Merry Christmas!"},
+    {type:"translate_word",question:"«Good luck!» — это?",options:["Удачи!","Пока!","Привет!","Спасибо!"],correct:0},
+  ],
+  time: [
+    {type:"translate_word",question:"«Time» — это?",options:["Пространство","Время","Скорость","Момент"],correct:1},
+    {type:"translate_word",question:"«Day» — это?",options:["Ночь","День","Неделя","Месяц"],correct:1},
+    {type:"translate_word",question:"«Night» — это?",options:["Утро","Вечер","Ночь","Полдень"],correct:2},
+    {type:"word_order",question:"Составь: «Который час?»",words:["time","What","is","it"],correct:["What","time","is","it"],hint:"What time is it?"},
+    {type:"translate_word",question:"«Monday» — это?",options:["Вторник","Среда","Понедельник","Четверг"],correct:2},
+    {type:"translate_word",question:"«Weekend» — это?",options:["Будни","Выходные","Праздник","Каникулы"],correct:1},
+    {type:"translate_word",question:"«January» — это?",options:["Февраль","Январь","Март","Апрель"],correct:1},
+    {type:"translate_word",question:"«Second» — это?",options:["Минута","Час","Секунда","День"],correct:2},
+    {type:"word_order",question:"Составь: «Сегодня хороший день»",words:["is","Today","good","day","a"],correct:["Today","is","a","good","day"],hint:"Today is a good day."},
+    {type:"translate_word",question:"«Yesterday» — это?",options:["Сегодня","Завтра","Вчера","Сейчас"],correct:2},
+    {type:"translate_word",question:"«Tomorrow» — это?",options:["Вчера","Сегодня","Завтра","Послезавтра"],correct:2},
+    {type:"word_order",question:"Составь: «Я приду завтра»",words:["come","I","tomorrow","will"],correct:["I","will","come","tomorrow"],hint:"I will come tomorrow."},
+  ],
+  clothes: [
+    {type:"translate_word",question:"«Shirt» — это?",options:["Штаны","Рубашка","Платье","Куртка"],correct:1},
+    {type:"translate_word",question:"«Shoes» — это?",options:["Носки","Ботинки","Шляпа","Перчатки"],correct:1},
+    {type:"translate_word",question:"«Hat» — это?",options:["Шарф","Шапка","Очки","Ремень"],correct:1},
+    {type:"word_order",question:"Составь: «Красное платье»",words:["dress","red","blue","black"],correct:["red","dress"],hint:"Red dress."},
+    {type:"translate_word",question:"«Jacket» — это?",options:["Пальто","Куртка","Свитер","Жилет"],correct:1},
+    {type:"translate_word",question:"«Trousers» — это?",options:["Джинсы","Шорты","Брюки","Леггинсы"],correct:2},
+    {type:"translate_word",question:"«Scarf» — это?",options:["Шапка","Варежки","Шарф","Платок"],correct:2},
+    {type:"translate_word",question:"«Gloves» — это?",options:["Носки","Сапоги","Перчатки","Варежки"],correct:2},
+    {type:"word_order",question:"Составь: «Новая куртка»",words:["jacket","new","old","warm"],correct:["new","jacket"],hint:"New jacket."},
+    {type:"translate_word",question:"«Dress» — это?",options:["Юбка","Платье","Блузка","Костюм"],correct:1},
+  ],
+  body: [
+    {type:"translate_word",question:"«Head» — это?",options:["Рука","Нога","Голова","Тело"],correct:2},
+    {type:"translate_word",question:"«Hand» — это?",options:["Нога","Рука","Палец","Локоть"],correct:1},
+    {type:"translate_word",question:"«Eye» — это?",options:["Ухо","Нос","Рот","Глаз"],correct:3},
+    {type:"word_order",question:"Составь: «У меня болит голова»",words:["head","My","hurts","aches"],correct:["My","head","hurts"],hint:"My head hurts."},
+    {type:"translate_word",question:"«Foot» — это?",options:["Колено","Нога","Стопа","Пятка"],correct:2},
+    {type:"translate_word",question:"«Heart» — это?",options:["Мозг","Лёгкие","Сердце","Печень"],correct:2},
+    {type:"translate_word",question:"«Arm» — это?",options:["Плечо","Рука (от плеча до кисти)","Кисть","Локоть"],correct:1},
+    {type:"translate_word",question:"«Leg» — это?",options:["Стопа","Нога (от бедра до стопы)","Колено","Бедро"],correct:1},
+    {type:"word_order",question:"Составь: «Красивые глаза»",words:["beautiful","eyes","hair","face"],correct:["beautiful","eyes"],hint:"Beautiful eyes."},
+    {type:"translate_word",question:"«Mouth» — это?",options:["Нос","Губы","Рот","Зубы"],correct:2},
+  ],
+  sports: [
+    {type:"translate_word",question:"«Football» — это?",options:["Баскетбол","Волейбол","Футбол","Теннис"],correct:2},
+    {type:"translate_word",question:"«Swim» — это?",options:["Бегать","Прыгать","Плавать","Ездить"],correct:2},
+    {type:"translate_word",question:"«Run» — это?",options:["Ходить","Бежать","Стоять","Сидеть"],correct:1},
+    {type:"word_order",question:"Составь: «Я люблю спорт»",words:["love","sports","I","like"],correct:["I","love","sports"],hint:"I love sports."},
+    {type:"translate_word",question:"«Ball» — это?",options:["Клюшка","Мяч","Ворота","Сетка"],correct:1},
+    {type:"translate_word",question:"«Game» — это?",options:["Спорт","Игра","Матч","Турнир"],correct:1},
+    {type:"translate_word",question:"«Team» — это?",options:["Игрок","Команда","Тренер","Болельщик"],correct:1},
+    {type:"translate_word",question:"«Win» — это?",options:["Проиграть","Выиграть","Ничья","Соревноваться"],correct:1},
+    {type:"word_order",question:"Составь: «Он хорошо играет»",words:["plays","He","well","good"],correct:["He","plays","well"],hint:"He plays well."},
+    {type:"translate_word",question:"«Gym» — это?",options:["Стадион","Бассейн","Спортзал","Поле"],correct:2},
+  ],
+  city: [
+    {type:"translate_word",question:"«Street» — это?",options:["Парк","Улица","Площадь","Здание"],correct:1},
+    {type:"translate_word",question:"«Building» — это?",options:["Дом","Здание","Офис","Квартира"],correct:1},
+    {type:"translate_word",question:"«Park» — это?",options:["Сад","Парк","Двор","Сквер"],correct:1},
+    {type:"word_order",question:"Составь: «Где находится банк?»",words:["bank","Where","the","is"],correct:["Where","is","the","bank"],hint:"Where is the bank?"},
+    {type:"translate_word",question:"«Bus» — это?",options:["Такси","Метро","Автобус","Трамвай"],correct:2},
+    {type:"translate_word",question:"«Station» — это?",options:["Остановка","Вокзал","Станция","Порт"],correct:2},
+    {type:"translate_word",question:"«Road» — это?",options:["Тротуар","Дорога","Переулок","Шоссе"],correct:1},
+    {type:"translate_word",question:"«Square» — это?",options:["Улица","Площадь","Парк","Сад"],correct:1},
+    {type:"word_order",question:"Составь: «Красивый город»",words:["city","beautiful","big","old"],correct:["beautiful","city"],hint:"Beautiful city."},
+    {type:"translate_word",question:"«Traffic» — это?",options:["Транспорт","Движение","Пробка","Светофор"],correct:2},
+  ],
+  tech: [
+    {type:"translate_word",question:"«Computer» — это?",options:["Телефон","Компьютер","Телевизор","Планшет"],correct:1},
+    {type:"translate_word",question:"«Phone» — это?",options:["Компьютер","Ноутбук","Телефон","Планшет"],correct:2},
+    {type:"translate_word",question:"«Internet» — это?",options:["Сеть","Интернет","Веб","Сайт"],correct:1},
+    {type:"word_order",question:"Составь: «Я ищу в интернете»",words:["search","I","online","internet"],correct:["I","search","online"],hint:"I search online."},
+    {type:"translate_word",question:"«Email» — это?",options:["Письмо","Электронная почта","Сообщение","Чат"],correct:1},
+    {type:"translate_word",question:"«Website» — это?",options:["Страница","Веб-сайт","Ссылка","Браузер"],correct:1},
+    {type:"translate_word",question:"«Download» — это?",options:["Загрузить","Скачать","Открыть","Сохранить"],correct:1},
+    {type:"translate_word",question:"«Screen» — это?",options:["Клавиатура","Экран","Мышь","Системный блок"],correct:1},
+    {type:"word_order",question:"Составь: «Новый телефон»",words:["new","phone","old","smartphone"],correct:["new","phone"],hint:"New phone."},
+    {type:"translate_word",question:"«App» — это?",options:["Программа","Приложение","Игра","Софт"],correct:1},
+  ],
+  emotions: [
+    {type:"translate_word",question:"«Happy» — это?",options:["Грустный","Счастливый","Злой","Уставший"],correct:1},
+    {type:"translate_word",question:"«Sad» — это?",options:["Весёлый","Грустный","Испуганный","Удивлённый"],correct:1},
+    {type:"translate_word",question:"«Angry» — это?",options:["Спокойный","Злой","Добрый","Милый"],correct:1},
+    {type:"word_order",question:"Составь: «Я очень счастлив»",words:["happy","very","I","so"],correct:["I","am","very","happy"],hint:"I am very happy."},
+    {type:"translate_word",question:"«Scared» — это?",options:["Смелый","Испуганный","Уверенный","Спокойный"],correct:1},
+    {type:"translate_word",question:"«Excited» — это?",options:["Скучающий","Взволнованный","Разочарованный","Спокойный"],correct:1},
+    {type:"translate_word",question:"«Tired» — это?",options:["Энергичный","Уставший","Больной","Здоровый"],correct:1},
+    {type:"translate_word",question:"«Bored» — это?",options:["Интересующийся","Скучающий","Весёлый","Активный"],correct:1},
+    {type:"word_order",question:"Составь: «Не грусти!»",words:["sad","Don't","be","worry"],correct:["Don't","be","sad"],hint:"Don't be sad!"},
+    {type:"translate_word",question:"«Worried» — это?",options:["Спокойный","Взволнованный (беспокойный)","Уверенный","Расслабленный"],correct:1},
+  ],
+  shopping: [
+    {type:"translate_word",question:"«Shop» — это?",options:["Магазин","Рынок","Торговый центр","Ларёк"],correct:0},
+    {type:"translate_word",question:"«Price» — это?",options:["Скидка","Цена","Деньги","Товар"],correct:1},
+    {type:"translate_word",question:"«Buy» — это?",options:["Продать","Купить","Обменять","Взять"],correct:1},
+    {type:"word_order",question:"Составь: «Сколько это стоит?»",words:["much","How","this","cost","does"],correct:["How","much","does","this","cost"],hint:"How much does this cost?"},
+    {type:"translate_word",question:"«Sell» — это?",options:["Купить","Продать","Отдать","Подарить"],correct:1},
+    {type:"translate_word",question:"«Cheap» — это?",options:["Дорогой","Дешёвый","Бесплатный","Доступный"],correct:1},
+    {type:"translate_word",question:"«Expensive» — это?",options:["Дешёвый","Дорогой","Хороший","Плохой"],correct:1},
+    {type:"translate_word",question:"«Money» — это?",options:["Карта","Деньги","Кредит","Наличные"],correct:1},
+    {type:"word_order",question:"Составь: «Я хочу купить это»",words:["buy","I","want","to","this"],correct:["I","want","to","buy","this"],hint:"I want to buy this."},
+    {type:"translate_word",question:"«Receipt» — это?",options:["Ценник","Чек","Скидка","Гарантия"],correct:1},
+  ],
+  restaurant: [
+    {type:"translate_word",question:"«Menu» — это?",options:["Заказ","Меню","Счёт","Официант"],correct:1},
+    {type:"translate_word",question:"«Delicious» — это?",options:["Пресный","Вкусный","Солёный","Сладкий"],correct:1},
+    {type:"translate_word",question:"«Waiter» — это?",options:["Повар","Официант","Бармен","Администратор"],correct:1},
+    {type:"word_order",question:"Составь: «Можно счёт, пожалуйста»",words:["check","the","Can","please","I","have"],correct:["Can","I","have","the","check","please"],hint:"Can I have the check please?"},
+    {type:"translate_word",question:"«Order» — это?",options:["Столик","Блюдо","Заказ","Официант"],correct:2},
+    {type:"translate_word",question:"«Tip» — это?",options:["Счёт","Чай","Чаевые","Закуска"],correct:2},
+    {type:"translate_word",question:"«Lunch» — это?",options:["Завтрак","Обед","Ужин","Перекус"],correct:1},
+    {type:"translate_word",question:"«Dinner» — это?",options:["Завтрак","Обед","Ужин","Ланч"],correct:2},
+    {type:"word_order",question:"Составь: «Я хочу заказать пиццу»",words:["to","order","I","want","pizza"],correct:["I","want","to","order","pizza"],hint:"I want to order pizza."},
+    {type:"translate_word",question:"«Fork» — это?",options:["Ложка","Нож","Вилка","Тарелка"],correct:2},
+  ],
+  grammar: [
+    {type:"word_order",question:"Сложи предложение: «Я хожу в школу каждый день»",words:["go","school","I","to","every","day"],correct:["I","go","to","school","every","day"],hint:"I go to school every day."},
+    {type:"translate_word",question:"«Am/is/are» — это?",options:["Мочь","Быть","Иметь","Делать"],correct:1},
+    {type:"word_order",question:"Составь вопрос: «Ты говоришь по-английски?»",words:["you","Do","English","speak"],correct:["Do","you","speak","English"],hint:"Do you speak English?"},
+    {type:"word_order",question:"Сложи отрицание: «Я не люблю кофе»",words:["like","I","do","coffee","not"],correct:["I","do","not","like","coffee"],hint:"I do not like coffee."},
+    {type:"translate_word",question:"«She is reading now» — перевод?",options:["Она читает всегда","Она читает сейчас","Она будет читать","Она прочитала"],correct:1},
+    {type:"translate_word",question:"«I have a car» — перевод?",options:["У меня была машина","У меня есть машина","Я хочу машину","Я потерял машину"],correct:1},
+    {type:"translate_word",question:"«We went to the park yesterday» — перевод?",options:["Мы идём в парк","Мы ходили в парк вчера","Мы пойдём в парк","Мы в парке"],correct:1},
+    {type:"translate_word",question:"«What are you doing?» — перевод?",options:["Что ты делал?","Что ты делаешь?","Что ты будешь делать?","Что ты сделал?"],correct:1},
+    {type:"word_order",question:"Составь правильное предложение: «never / I / late / am»",words:["I","never","am","late"],correct:["I","am","never","late"],hint:"I am never late."},
+    {type:"translate_word",question:"«If I were you» — это?",options:["Если бы я был тобой","Если я буду тобой","Если я был тобой","Если я стану тобой"],correct:0},
+  ],
+  house: [
+    {type:"translate_word",question:"«House» — это?",options:["Квартира","Дом","Здание","Комната"],correct:1},
+    {type:"translate_word",question:"«Room» — это?",options:["Коридор","Комната","Кухня","Ванная"],correct:1},
+    {type:"translate_word",question:"«Kitchen» — это?",options:["Спальня","Гостиная","Кухня","Прихожая"],correct:2},
+    {type:"translate_word",question:"«Bedroom» — это?",options:["Ванная","Гостиная","Спальня","Кабинет"],correct:2},
+    {type:"translate_word",question:"«Bathroom» — это?",options:["Кухня","Туалет","Ванная","Душевая"],correct:2},
+    {type:"translate_word",question:"«Living room» — это?",options:["Спальня","Гостиная","Столовая","Прихожая"],correct:1},
+    {type:"translate_word",question:"«Door» — это?",options:["Окно","Стена","Дверь","Пол"],correct:2},
+    {type:"translate_word",question:"«Window» — это?",options:["Дверь","Окно","Потолок","Крыша"],correct:1},
+    {type:"word_order",question:"Составь: «Мой дом — моя крепость»",words:["is","My","castle","home","my"],correct:["My","home","is","my","castle"],hint:"My home is my castle."},
+    {type:"translate_word",question:"«Garden» — это?",options:["Балкон","Сад","Двор","Гараж"],correct:1},
+    {type:"translate_word",question:"«Floor» — это?",options:["Стена","Потолок","Пол","Ковёр"],correct:2},
+    {type:"word_order",question:"Составь: «Они живут в большом доме»",words:["big","live","a","in","house","they"],correct:["They","live","in","a","big","house"],hint:"They live in a big house."},
+  ],
+  professions: [
+    {type:"translate_word",question:"«Doctor» — это?",options:["Учитель","Врач","Инженер","Адвокат"],correct:1},
+    {type:"translate_word",question:"«Engineer» — это?",options:["Архитектор","Инженер","Строитель","Дизайнер"],correct:1},
+    {type:"translate_word",question:"«Lawyer» — это?",options:["Судья","Прокурор","Адвокат","Нотариус"],correct:2},
+    {type:"translate_word",question:"«Scientist» — это?",options:["Учёный","Студент","Преподаватель","Исследователь"],correct:0},
+    {type:"translate_word",question:"«Artist» — это?",options:["Музыкант","Художник","Актёр","Писатель"],correct:1},
+    {type:"translate_word",question:"«Musician» — это?",options:["Певец","Музыкант","Композитор","Дирижёр"],correct:1},
+    {type:"translate_word",question:"«Chef» — это?",options:["Повар","Официант","Бармен","Кондитер"],correct:0},
+    {type:"translate_word",question:"«Driver» — это?",options:["Механик","Водитель","Шофёр","Курьер"],correct:1},
+    {type:"word_order",question:"Составь: «Я хочу стать врачом»",words:["become","I","doctor","a","want","to"],correct:["I","want","to","become","a","doctor"],hint:"I want to become a doctor."},
+    {type:"translate_word",question:"«Pilot» — это?",options:["Стюард","Пилот","Диспетчер","Инженер"],correct:1},
+    {type:"translate_word",question:"«Journalist» — это?",options:["Писатель","Журналист","Редактор","Корреспондент"],correct:1},
+    {type:"word_order",question:"Составь: «Она работает учителем»",words:["as","teacher","works","a","she"],correct:["She","works","as","a","teacher"],hint:"She works as a teacher."},
+  ],
+  school: [
+    {type:"translate_word",question:"«School» — это?",options:["Университет","Колледж","Школа","Институт"],correct:2},
+    {type:"translate_word",question:"«Teacher» — это?",options:["Студент","Учитель","Директор","Завуч"],correct:1},
+    {type:"translate_word",question:"«Student» — это?",options:["Ученик","Учитель","Преподаватель","Директор"],correct:0},
+    {type:"translate_word",question:"«Class» — это?",options:["Парта","Доска","Класс","Урок"],correct:2},
+    {type:"translate_word",question:"«Homework» — это?",options:["Контрольная","Домашнее задание","Экзамен","Тест"],correct:1},
+    {type:"translate_word",question:"«Exam» — это?",options:["Урок","Экзамен","Перемена","Каникулы"],correct:1},
+    {type:"translate_word",question:"«University» — это?",options:["Школа","Колледж","Университет","Академия"],correct:2},
+    {type:"translate_word",question:"«Degree» — это?",options:["Диплом","Сертификат","Степень","Аттестат"],correct:2},
+    {type:"word_order",question:"Составь: «Она учится в университете»",words:["university","at","studies","she"],correct:["She","studies","at","university"],hint:"She studies at university."},
+    {type:"translate_word",question:"«Graduate» — это?",options:["Поступить","Учиться","Окончить","Отчислиться"],correct:2},
+    {type:"translate_word",question:"«Library» — это?",options:["Читальный зал","Библиотека","Книжный магазин","Архив"],correct:1},
+    {type:"word_order",question:"Составь: «Сколько у тебя предметов?»",words:["subjects","many","do","you","how","have"],correct:["How","many","subjects","do","you","have"],hint:"How many subjects do you have?"},
+  ],
+  art: [
+    {type:"translate_word",question:"«Art» — это?",options:["Музыка","Искусство","Театр","Литература"],correct:1},
+    {type:"translate_word",question:"«Music» — это?",options:["Песня","Музыка","Танец","Ритм"],correct:1},
+    {type:"translate_word",question:"«Painting» — это?",options:["Рисунок","Картина","Фотография","Плакат"],correct:1},
+    {type:"translate_word",question:"«Theatre» — это?",options:["Кино","Театр","Цирк","Концерт"],correct:1},
+    {type:"translate_word",question:"«Cinema» — это?",options:["Кинотеатр","Телевизор","Видео","Экран"],correct:0},
+    {type:"translate_word",question:"«Concert» — это?",options:["Фестиваль","Концерт","Выступление","Шоу"],correct:1},
+    {type:"translate_word",question:"«Book» — это?",options:["Журнал","Книга","Газета","Рассказ"],correct:1},
+    {type:"translate_word",question:"«Poem» — это?",options:["Песня","Стихотворение","Роман","Повесть"],correct:1},
+    {type:"word_order",question:"Составь: «Я люблю классическую музыку»",words:["love","classical","I","music"],correct:["I","love","classical","music"],hint:"I love classical music."},
+    {type:"translate_word",question:"«Museum» — это?",options:["Галерея","Музей","Выставка","Архив"],correct:1},
+    {type:"translate_word",question:"«Sculpture» — это?",options:["Картина","Скульптура","Гравюра","Фреска"],correct:1},
+    {type:"word_order",question:"Составь: «Он написал новую книгу»",words:["wrote","new","he","a","book"],correct:["He","wrote","a","new","book"],hint:"He wrote a new book."},
+  ],
+  society: [
+    {type:"translate_word",question:"«Government» — это?",options:["Парламент","Правительство","Президент","Министерство"],correct:1},
+    {type:"translate_word",question:"«Law» — это?",options:["Право","Закон","Правило","Норма"],correct:1},
+    {type:"translate_word",question:"«Freedom» — это?",options:["Равенство","Братство","Свобода","Независимость"],correct:2},
+    {type:"translate_word",question:"«Rights» — это?",options:["Обязанности","Права","Свободы","Привилегии"],correct:1},
+    {type:"translate_word",question:"«President» — это?",options:["Премьер-министр","Президент","Лидер","Глава"],correct:1},
+    {type:"translate_word",question:"«Election» — это?",options:["Голосование","Выборы","Референдум","Собрание"],correct:1},
+    {type:"translate_word",question:"«Party» — это?",options:["Праздник","Партия","Группа","Объединение"],correct:1},
+    {type:"translate_word",question:"«Vote» — это?",options:["Выбирать","Голосовать","Предлагать","Назначать"],correct:1},
+    {type:"word_order",question:"Составь: «Граждане имеют права»",words:["have","citizens","rights"],correct:["Citizens","have","rights"],hint:"Citizens have rights."},
+    {type:"translate_word",question:"«Democracy» — это?",options:["Монархия","Демократия","Республика","Диктатура"],correct:1},
+    {type:"translate_word",question:"«Peace» — это?",options:["Война","Мир","Спокойствие","Тишина"],correct:1},
+    {type:"word_order",question:"Составь: «Мы хотим жить в мире»",words:["want","peace","to","we","live","in"],correct:["We","want","to","live","in","peace"],hint:"We want to live in peace."},
+  ],
+  science: [
+    {type:"translate_word",question:"«Science» — это?",options:["Технология","Наука","Исследование","Открытие"],correct:1},
+    {type:"translate_word",question:"«Research» — это?",options:["Изучение","Исследование","Анализ","Эксперимент"],correct:1},
+    {type:"translate_word",question:"«Experiment» — это?",options:["Наблюдение","Эксперимент","Опыт","Практика"],correct:1},
+    {type:"translate_word",question:"«Theory» — это?",options:["Практика","Теория","Гипотеза","Закон"],correct:1},
+    {type:"translate_word",question:"«Biology» — это?",options:["Химия","Физика","Биология","География"],correct:2},
+    {type:"translate_word",question:"«Chemistry» — это?",options:["Биология","Физика","Химия","Математика"],correct:2},
+    {type:"translate_word",question:"«Physics» — это?",options:["Астрономия","Физика","Геология","Математика"],correct:1},
+    {type:"translate_word",question:"«Mathematics» — это?",options:["Математика","Статистика","Алгебра","Геометрия"],correct:0},
+    {type:"word_order",question:"Составь: «Учёные делают открытия»",words:["make","Scientists","discoveries"],correct:["Scientists","make","discoveries"],hint:"Scientists make discoveries."},
+    {type:"translate_word",question:"«Laboratory» — это?",options:["Кабинет","Лаборатория","Мастерская","Студия"],correct:1},
+    {type:"translate_word",question:"«Discovery» — это?",options:["Изобретение","Открытие","Находка","Достижение"],correct:1},
+    {type:"word_order",question:"Составь: «Мы провели успешный эксперимент»",words:["successful","conducted","experiment","a","we"],correct:["We","conducted","a","successful","experiment"],hint:"We conducted a successful experiment."},
+  ],
+  business: [
+    {type:"translate_word",question:"«Business» — это?",options:["Работа","Бизнес","Компания","Фирма"],correct:1},
+    {type:"translate_word",question:"«Company» — это?",options:["Организация","Компания","Корпорация","Предприятие"],correct:1},
+    {type:"translate_word",question:"«Manager» — это?",options:["Директор","Менеджер","Начальник","Руководитель"],correct:1},
+    {type:"translate_word",question:"«Marketing» — это?",options:["Продажи","Маркетинг","Реклама","Брендинг"],correct:1},
+    {type:"translate_word",question:"«Sales» — это?",options:["Покупки","Продажи","Торговля","Бизнес"],correct:1},
+    {type:"translate_word",question:"«Customer» — это?",options:["Продавец","Клиент","Покупатель","Партнёр"],correct:1},
+    {type:"translate_word",question:"«Product» — это?",options:["Услуга","Продукт","Товар","Изделие"],correct:1},
+    {type:"translate_word",question:"«Service» — это?",options:["Работа","Услуга","Помощь","Поддержка"],correct:1},
+    {type:"word_order",question:"Составь: «Я работаю в международной компании»",words:["international","work","an","I","company","in"],correct:["I","work","in","an","international","company"],hint:"I work in an international company."},
+    {type:"translate_word",question:"«Profit» — это?",options:["Убыток","Прибыль","Доход","Выручка"],correct:1},
+    {type:"translate_word",question:"«Investment» — это?",options:["Сбережения","Инвестиция","Вклад","Кредит"],correct:1},
+    {type:"word_order",question:"Составь: «Он создал свой бизнес»",words:["business","own","his","created","he"],correct:["He","created","his","own","business"],hint:"He created his own business."},
+  ],
+  medicine: [
+    {type:"translate_word",question:"«Medicine» — это?",options:["Лекарство","Медицина","Таблетка","Лечение"],correct:1},
+    {type:"translate_word",question:"«Hospital» — это?",options:["Клиника","Больница","Поликлиника","Аптека"],correct:1},
+    {type:"translate_word",question:"«Pharmacy» — это?",options:["Больница","Аптека","Лаборатория","Кабинет"],correct:1},
+    {type:"translate_word",question:"«Nurse» — это?",options:["Врач","Медсестра","Фельдшер","Санитар"],correct:1},
+    {type:"translate_word",question:"«Patient» — это?",options:["Доктор","Пациент","Больной","Клиент"],correct:1},
+    {type:"translate_word",question:"«Treatment» — это?",options:["Диагноз","Лечение","Операция","Осмотр"],correct:1},
+    {type:"translate_word",question:"«Operation» — это?",options:["Процедура","Операция","Осмотр","Анализ"],correct:1},
+    {type:"translate_word",question:"«Vaccine» — это?",options:["Антибиотик","Вакцина","Лекарство","Сыворотка"],correct:1},
+    {type:"word_order",question:"Составь: «Мне нужно к врачу»",words:["see","need","I","to","doctor","a"],correct:["I","need","to","see","a","doctor"],hint:"I need to see a doctor."},
+    {type:"translate_word",question:"«Symptom» — это?",options:["Болезнь","Симптом","Признак","Состояние"],correct:1},
+    {type:"translate_word",question:"«Health» — это?",options:["Болезнь","Здоровье","Самочувствие","Состояние"],correct:1},
+    {type:"word_order",question:"Составь: «Здоровье — это самое главное»",words:["important","most","Health","the","is"],correct:["Health","is","the","most","important"],hint:"Health is the most important."},
+  ],
+  grammar2: [
+    {type:"word_order",question:"Сложи: «Если бы я знал, я бы пришёл»",words:["would","known","I","have","come","if"],correct:["If","I","had","known","I","would","have","come"],hint:"If I had known, I would have come."},
+    {type:"translate_word",question:"«I wish I were there» — перевод?",options:["Я хочу там быть","Если бы я был там","Мне жаль, что меня там нет","Я надеюсь быть там"],correct:1},
+    {type:"word_order",question:"Сложи: «Она сказала, что любит его»",words:["she","loved","him","said","that"],correct:["She","said","that","she","loved","him"],hint:"She said that she loved him."},
+    {type:"translate_word",question:"«I used to smoke» — перевод?",options:["Я курил (раньше)","Я привык курить","Я курю","Я буду курить"],correct:0},
+    {type:"translate_word",question:"«She is used to getting up early» — перевод?",options:["Она привыкла рано вставать","Она рано встаёт","Она должна рано вставать","Она любит рано вставать"],correct:0},
+    {type:"word_order",question:"Сложи пассив: «Этот дом построен в 1990 году»",words:["in","was","built","This","1990","house"],correct:["This","house","was","built","in","1990"],hint:"This house was built in 1990."},
+    {type:"translate_word",question:"«By the time you arrive, we will have finished» — перевод?",options:["Когда ты приедешь, мы закончим","К тому времени, как ты приедешь, мы уже закончим","Мы закончим, когда ты приедешь","Мы закончили, когда ты приехал"],correct:1},
+    {type:"translate_word",question:"«Not only did he pass the exam, but he also got an A» — перевод?",options:["Он не только сдал экзамен, но и получил пятёрку","Он сдал экзамен и получил пятёрку","Он сдал экзамен, но не получил пятёрку","Если бы он сдал экзамен, получил бы пятёрку"],correct:0},
+    {type:"word_order",question:"Сложи: «Чем больше я учу, тем больше знаю»",words:["more","I","know","the","learn","the"],correct:["The","more","I","learn","the","more","I","know"],hint:"The more I learn, the more I know."},
+    {type:"translate_word",question:"«Had I known, I would have acted differently» — перевод?",options:["Если бы я знал, я бы поступил иначе","Я знал и поступил иначе","Я не знал и поступил правильно","Если я узнаю, я поступлю иначе"],correct:0},
+    {type:"word_order",question:"Сложи модальный глагол: «Тебе не стоило этого делать»",words:["shouldn't","done","have","you","that"],correct:["You","shouldn't","have","done","that"],hint:"You shouldn't have done that."},
+    {type:"translate_word",question:"«I'd rather you didn't smoke» — перевод?",options:["Я бы лучше не курил","Я предпочитаю, чтобы ты не курил","Ты не должен курить","Курить вредно"],correct:1},
+  ],
+  advanced: [
+    {type:"translate_word",question:"«It's raining cats and dogs» — это?",options:["Идёт сильный дождь","Падают кошки и собаки","Дождь прошёл","Дождя нет"],correct:0},
+    {type:"translate_word",question:"«Break a leg» — это?",options:["Сломать ногу","Удачи","Провалиться","Поторопиться"],correct:1},
+    {type:"translate_word",question:"«Piece of cake» — это?",options:["Кусок торта","Легко","Трудно","Вкусно"],correct:1},
+    {type:"word_order",question:"Составь идиому: «Собака на сене»",words:["the","in","dog","manger","the"],correct:["the","dog","in","the","manger"],hint:"The dog in the manger."},
+    {type:"translate_word",question:"«To be in the same boat» — это?",options:["Быть в одной лодке","Быть в одинаковом положении","Плыть вместе","Делить проблемы"],correct:1},
+    {type:"translate_word",question:"«Bite the bullet» — это?",options:["Укусить пулю","Смириться и сделать","Испугаться","Убежать"],correct:1},
+    {type:"word_order",question:"Составь диалог: «Как прошёл день? — Неплохо, спасибо»",words:["bad","not","How","your","go","day"],correct:["How","was","your","day","Not","bad","thanks"],hint:"How was your day? - Not bad, thanks."},
+    {type:"translate_word",question:"«Long time no see» — это?",options:["Долго не виделись","Долго смотреть","Не видел долгое время","Скучал"],correct:0},
+    {type:"word_order",question:"Составь телефонный разговор: «Алло, это Джон? — Да, говорите»",words:["this","John","speaking","is","Yes"],correct:["Hello","is","this","John","Yes","speaking"],hint:"Hello, is this John? - Yes, speaking."},
+    {type:"translate_word",question:"«Make yourself at home» — это?",options:["Сделай себе домой","Чувствуй себя как дома","Построй дом сам","Иди домой"],correct:1},
+    {type:"translate_word",question:"«I'm all ears» — это?",options:["Я весь в ушах","Я внимательно слушаю","У меня болят уши","Я глухой"],correct:1},
+    {type:"translate_word",question:"«Once in a blue moon» — это?",options:["Раз в голубую луну","Очень редко","Каждый месяц","Постоянно"],correct:1},
+    {type:"translate_word",question:"«To cost an arm and a leg» — это?",options:["Стоить руку и ногу","Быть очень дорогим","Потерять конечность","Дорогое лечение"],correct:1},
+    {type:"translate_word",question:"«Hit the sack» — это?",options:["Ударить мешок","Пойти спать","Упасть","Устать"],correct:1},
+    {type:"word_order",question:"Составь выражение: «Брать быка за рога»",words:["bull","the","by","take","horns","the"],correct:["take","the","bull","by","the","horns"],hint:"Take the bull by the horns."},
+  ]
+};
+
+function getQuestionsForType(type, count=5) {
+  const bank = questionBank[type] || questionBank.basics;
+  const shuffled = [...bank].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+// Построение пути из 50 уроков
+function renderPath() {
+  const path = document.getElementById('lesson-path');
+  path.innerHTML = '';
+  let globalIdx = 0;
+  
+  for(let ui = 0; ui < 30; ui++) {  
+    const prevUnitNeeded = ui === 0 ? true : (state.lessonProgress.slice((ui-1)*5, ui*5).filter(p=>p>0).length >= 3);
+    const unitLocked = !prevUnitNeeded;
+    
+    const unitEl = document.createElement('div');
+    unitEl.className = 'path-unit';
+    unitEl.innerHTML = `<div class="unit-header ${unitLocked ? 'unit-header-locked' : ''}"><span>${unitIcons[ui]} ${unitNames[ui]}</span><span style="font-size:0.75rem;">${unitLocked ? '🔒 Заблокировано' : 'Раздел '+(ui+1)}</span></div>`;
+    
+    const nodesWrap = document.createElement('div');
+    nodesWrap.className = 'lesson-nodes';
+    
+    const rows = [];
+    let cur = [];
+    for(let li = 0; li < 5; li++) {
+      cur.push({ li, globalIdx: globalIdx + li });
+      if(cur.length === 2 || li === 4) {
+        if(cur.length) rows.push([...cur]);
+        cur = [];
+      }
+    }
+    
+    rows.forEach((row, ri) => {
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'path-row' + (ri % 2 === 1 ? ' offset' : '');
+      row.forEach(({ li, globalIdx: gi }) => {
+        const done = state.lessonProgress[gi] > 0;
+        const locked = unitLocked || (!done && li > 0 && !state.lessonProgress[gi-1]);
+        let cls = locked ? 'locked' : done ? 'complete' : 'active';
+        
+        const wrap = document.createElement('div');
+        wrap.className = 'node-wrap';
+        wrap.innerHTML = `<div class="lesson-node ${cls}" onclick="${locked ? '' : `startLesson(${ui}, ${li})`}" title="${unitNames[ui]} урок ${li+1}">${done ? '✅' : unitIcons[ui]}</div><div class="node-label">Урок ${li+1}</div>`;
+        rowDiv.appendChild(wrap);
+      });
+      nodesWrap.appendChild(rowDiv);
+    });
+    
+    globalIdx += 5;
+    unitEl.appendChild(nodesWrap);
+    path.appendChild(unitEl);
+  }
+}
+
+function startLesson(unitIdx, lessonIdx) {
+  if(state.hearts <= 0){ document.getElementById('modal-no-hearts').classList.add('open'); return; }
+  // обновляем серию при старте урока
+  updateStreakOnActivity();
+  updateTopStats();
+  const type = lessonTypes[unitIdx];
+  const questions = getQuestionsForType(type, 5);
+  lessonState = { unitIdx, lessonIdx, questions, currentQ:0, correctCount:0, selectedAnswer:null, answered:false, usedWords:[], answerWords:[], startTime:Date.now() };
+  updateLessonHearts();
+  showScreen('lesson');
+  renderQuestion();
+}
+
+let lessonState = { unitIdx:0, lessonIdx:0, questions:[], currentQ:0, correctCount:0, selectedAnswer:null, answered:false, usedWords:[], answerWords:[], startTime:0 };
+function updateLessonHearts() { let h='❤️'.repeat(state.hearts)+'🖤'.repeat(5-state.hearts); document.getElementById('lesson-hearts').textContent=h; }
+function renderQuestion(){
+  let q=lessonState.questions[lessonState.currentQ];
+  document.getElementById('lesson-progress').style.width=(lessonState.currentQ/lessonState.questions.length)*100+'%';
+  lessonState.selectedAnswer=null; lessonState.answered=false; lessonState.answerWords=[]; lessonState.usedWords=[]; hideFeedback();
+  let html=`<div class="lesson-type-badge">${q.type==='word_order'?'🔤 Составь фразу':'🌍 Переведи'}</div><div class="lesson-question">${q.question}</div><div class="worm-speech-wrap"><svg class="worm-speech-worm" viewBox="0 0 80 80"><ellipse cx="40" cy="60" rx="18" ry="12" fill="#8BC34A"/><ellipse cx="40" cy="38" rx="22" ry="20" fill="#9CCC65"/><circle cx="32" cy="32" r="7" fill="white"/><circle cx="48" cy="32" r="7" fill="white"/><circle cx="33.5" cy="32" r="4" fill="#333"/><circle cx="49.5" cy="32" r="4" fill="#333"/><circle cx="34.5" cy="31" r="1.5" fill="white"/><circle cx="50.5" cy="31" r="1.5" fill="white"/><path d="M 30 46 Q 40 53 50 46" fill="none" stroke="#689F38" stroke-width="2"/></svg><div class="speech-bubble">${["Подумай хорошенько! Undo верит в тебя.","Не торопись. У него нет ног.","Ты справишься! Undo в этом уверен.","Сосредоточься! Undo смотрит.","Давай, ещё одно слово!"][lessonState.currentQ%5]}</div></div>`;
+  if(q.type==='translate_word'){
+    html+=`<div class="options-grid" id="options-grid">`;
+    q.options.forEach((opt,i)=>{ html+=`<button class="option-btn" onclick="selectOption(${i})">${opt}</button>`; });
+    html+=`</div>`;
+  }else{
+    html+=`<div class="answer-zone" id="answer-zone" onclick="removeLastWord()"><span style="color:var(--gray-mid);">Нажми на слова ниже ↓</span></div><div class="word-bank" id="word-bank">`;
+    let shuffledWords=[...q.words].sort(()=>Math.random()-0.5);
+    shuffledWords.forEach((w,i)=>{ html+=`<button class="word-chip" id="chip-${i}" onclick="addWord('${w}', ${i})">${w}</button>`; });
+    html+=`</div>`;
+  }
+  document.getElementById('lesson-body').innerHTML=html;
+}
+function selectOption(idx){ if(lessonState.answered) return; lessonState.selectedAnswer=idx; document.querySelectorAll('.option-btn').forEach((btn,i)=>{ btn.classList.remove('selected'); if(i===idx) btn.classList.add('selected'); }); document.getElementById('check-btn').classList.add('ready'); }
+function addWord(word,chipIdx){ if(lessonState.answered) return; lessonState.answerWords.push(word); lessonState.usedWords.push(chipIdx); document.getElementById('chip-'+chipIdx).classList.add('used'); updateAnswerZone(); if(lessonState.answerWords.length>0) document.getElementById('check-btn').classList.add('ready'); }
+function removeLastWord(){ if(lessonState.answered || lessonState.answerWords.length===0) return; let lastChipIdx=lessonState.usedWords.pop(); lessonState.answerWords.pop(); if(lastChipIdx!==undefined) document.getElementById('chip-'+lastChipIdx).classList.remove('used'); updateAnswerZone(); if(lessonState.answerWords.length===0) document.getElementById('check-btn').classList.remove('ready'); }
+function updateAnswerZone(){ let zone=document.getElementById('answer-zone'); if(!zone) return; if(lessonState.answerWords.length===0){ zone.innerHTML='<span style="color:var(--gray-mid);">Нажми на слова ниже ↓</span>'; zone.classList.remove('has-answer'); }else{ zone.classList.add('has-answer'); zone.innerHTML=lessonState.answerWords.map(w=>`<div class="answer-chip">${w}</div>`).join(''); } }
+function checkAnswer(){
+  if(lessonState.answered) return;
+  let q=lessonState.questions[lessonState.currentQ];
+  let isCorrect=false;
+  if(q.type==='translate_word'){ if(lessonState.selectedAnswer===null) return; isCorrect=lessonState.selectedAnswer===q.correct; }
+  else{ if(lessonState.answerWords.length===0) return; isCorrect=lessonState.answerWords.join(' ')===q.correct.join(' '); }
+  lessonState.answered=true;
+  if(isCorrect){
+    lessonState.correctCount++;
+    showFeedback(true,q.hint);
+    if(q.type==='translate_word'){ document.querySelectorAll('.option-btn').forEach((btn,i)=>{ if(i===q.correct) btn.classList.add('correct'); else {btn.classList.add('disabled'); btn.style.opacity='0.5';} }); }
+    else{ let zone=document.getElementById('answer-zone'); if(zone) zone.classList.add('correct'); }
+  }else{
+    // уменьшаем жизни, и если они стали 0, увеличиваем счётчик смертей
+    let oldHearts = state.hearts;
+    state.hearts=Math.max(0,state.hearts-1);
+    if (oldHearts > 0 && state.hearts === 0) {
+      state.deaths += 1;
+      updateTopStats(); // обновляем смерти в топбаре
+      saveState();
+    }
+    updateLessonHearts(); updateTopStats(); saveState();
+    showFeedback(false,'Правильный ответ: '+(q.type==='translate_word'?q.options[q.correct]:q.correct.join(' ')));
+    if(q.type==='translate_word'){ document.querySelectorAll('.option-btn').forEach((btn,i)=>{ if(i===lessonState.selectedAnswer) btn.classList.add('wrong'); else if(i===q.correct) btn.classList.add('correct'); btn.classList.add('disabled'); }); }
+    else{ let zone=document.getElementById('answer-zone'); if(zone){ zone.classList.add('wrong'); zone.classList.add('shake'); } }
+    if(state.hearts<=0) setTimeout(()=>{ hideFeedback(); document.getElementById('modal-no-hearts').classList.add('open'); },1500);
+  }
+}
+function showFeedback(correct,detail){ let bar=document.getElementById('feedback-bar'); bar.className='feedback-bar '+(correct?'correct':'wrong'); document.getElementById('feedback-title').textContent=correct?['Отлично! 🎉','Верно! ✨','Так держать! 🔥','Молодец! 💪'][Math.floor(Math.random()*4)]:['Неправильно 😬','Ой! 🙈','Не совсем... 💭','Попробуй ещё раз! 📚'][Math.floor(Math.random()*4)]; document.getElementById('feedback-detail').textContent=detail||''; bar.style.display='block'; }
+function hideFeedback(){ document.getElementById('feedback-bar').style.display='none'; }
+function nextQuestion(){ hideFeedback(); lessonState.currentQ++; if(lessonState.currentQ>=lessonState.questions.length) endLesson(); else renderQuestion(); }
+function endLesson(){
+  let elapsed=Math.round((Date.now()-lessonState.startTime)/1000); let correct=lessonState.correctCount; let total=lessonState.questions.length;
+  let xpEarned=correct*10+(correct===total?20:0); state.xp+=xpEarned; state.lessonsCompleted++;
+  let globalIdx=lessonState.unitIdx*5+lessonState.lessonIdx; state.lessonProgress[globalIdx]=1; saveState();
+  document.getElementById('result-xp').textContent='+'+xpEarned; document.getElementById('result-correct').textContent=correct+'/'+total; document.getElementById('result-time').textContent=elapsed+'с';
+  let quotes=['"Язык — это дорога в мир другого человека." — Undo (ну, почти)','"Повторение — мать учения, а Undo — отец червяка."','"Каждый день немного — лучше, чем ничего."','"The more you know, the more you grow." — Undo умеет в английский','"Ещё МНОГО уроков впереди! Undo не устал. Пока."'];
+  document.getElementById('result-quote').textContent=quotes[Math.floor(Math.random()*quotes.length)];
+  document.getElementById('result-title').textContent=correct===total?'🌟 Идеальный результат!':'Урок завершён!';
+  document.getElementById('result-subtitle').textContent=correct===total?'Undo аплодирует (мысленно)!':`${correct} из ${total} — неплохо! Undo доволен.`;
+  showScreen('result');
+}
+function finishLesson(){ renderPath(); updateTopStats(); showScreen('home'); switchTab('learn'); }
+function retryLesson(){ startLesson(lessonState.unitIdx,lessonState.lessonIdx); }
+function showQuitModal(){ document.getElementById('modal-quit').classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function quitLesson(){ closeModal('modal-quit'); renderPath(); showScreen('home'); }
+function refillHearts(){ state.hearts=5; updateTopStats(); saveState(); closeModal('modal-no-hearts'); updateLessonHearts(); }
+function showStreakPopup(days,label){ document.getElementById('streak-num').textContent=label||(days+' '+(days===1?'день!':'дня!')); document.getElementById('streak-popup').classList.add('show'); }
+function closeStreak(){ document.getElementById('streak-popup').classList.remove('show'); }
+function switchTab(tab){ ['learn','dictionary','alphabet','leaders','profile'].forEach(t=>{ let sub=document.getElementById('sub-'+t); if(sub) sub.classList.remove('active'); let nav=document.getElementById('nav-'+t); if(nav) nav.classList.remove('active'); }); document.getElementById('sub-'+tab).classList.add('active'); document.getElementById('nav-'+tab).classList.add('active'); if(tab==='leaders') renderLeaderboard(); if(tab==='profile') renderProfile(); if(tab==='dictionary') renderDictionary(); if(tab==='alphabet') renderAlphabet(); }
+function renderLeaderboard(){ let fakeUsers=[{name:"АлексАнгличанин",xp:2840,flag:"🦊"},{name:"МашаПолиглот",xp:2310,flag:"🐱"},{name:"ДимаСтаратель",xp:1980,flag:"🐻"},{name:"Катя_учит",xp:1450,flag:"🦋"},{name:"ПетяОтличник",xp:1200,flag:"🦅"},{name:"НатальяБыстрая",xp:980,flag:"🐢"}]; let myXp=state.xp||0; let myName=state.user?.name||'Ты'; let allUsers=[...fakeUsers,{name:myName,xp:myXp,flag:"🐛",isMe:true}]; allUsers.sort((a,b)=>b.xp-a.xp); document.getElementById('leader-list').innerHTML=allUsers.map((u,i)=>{ let rankClass=i===0?'gold':i===1?'silver':i===2?'bronze':''; let rankIcon=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1); return `<div class="leader-item ${u.isMe?'me':''}"><div class="leader-rank ${rankClass}">${rankIcon}</div><div class="leader-avatar">${u.flag}</div><div class="leader-name">${u.name}${u.isMe?' <small>← Это ты</small>':''}</div><div class="leader-xp">⚡ ${u.xp}</div></div>`; }).join(''); }
+function renderProfile(){ let name=state.user?.name||'?'; document.getElementById('profile-name').textContent=name; document.getElementById('profile-avatar').textContent=name.charAt(0).toUpperCase(); document.getElementById('pstat-days').textContent=state.streak; document.getElementById('pstat-xp').textContent=state.xp; document.getElementById('pstat-lessons').textContent=state.lessonsCompleted; document.getElementById('pstat-deaths').textContent=state.deaths; let achieves=[{icon:'🌱',name:'Первый шаг',desc:'Начал учиться',done:state.lessonsCompleted>=1},{icon:'🔥',name:'На огне',desc:'3 дня подряд',done:state.streak>=3},{icon:'⚡',name:'100 XP',desc:'Набери 100 XP',done:state.xp>=100},{icon:'🎓',name:'Студент',desc:'10 уроков',done:state.lessonsCompleted>=10},{icon:'🐛',name:'Друг Undo',desc:'Просто зайди',done:true},{icon:'🏆',name:'Марафонец',desc:'25 уроков',done:state.lessonsCompleted>=25}]; document.getElementById('achievements-grid').innerHTML=achieves.map(a=>`<div style="background:white; border-radius:12px; padding:0.9rem; display:flex; align-items:center; gap:0.7rem; box-shadow:0 2px 6px rgba(0,0,0,0.06); ${a.done?'':'opacity:0.45;'}"><span style="font-size:1.6rem;">${a.icon}</span><div><div style="font-weight:800;">${a.name}</div><div style="font-size:0.75rem; color:var(--gray-dark);">${a.desc}</div></div></div>`).join(''); }
+function renderDictionary(){
+  const dict = [
+    // A1 - Базовые слова (1-100)
+    {en:"Hello",ru:"Привет"},{en:"Hi",ru:"Здравствуй"},{en:"Goodbye",ru:"Пока"},{en:"Bye",ru:"Пока"},{en:"Please",ru:"Пожалуйста"},{en:"Thank you",ru:"Спасибо"},{en:"Thanks",ru:"Спасибо"},{en:"Yes",ru:"Да"},{en:"No",ru:"Нет"},{en:"Sorry",ru:"Извините"},
+    {en:"Excuse me",ru:"Извините"},{en:"OK",ru:"Хорошо"},{en:"Good",ru:"Хороший"},{en:"Bad",ru:"Плохой"},{en:"Big",ru:"Большой"},{en:"Small",ru:"Маленький"},{en:"New",ru:"Новый"},{en:"Old",ru:"Старый"},{en:"Hot",ru:"Горячий"},{en:"Cold",ru:"Холодный"},
+    {en:"Happy",ru:"Счастливый"},{en:"Sad",ru:"Грустный"},{en:"Beautiful",ru:"Красивый"},{en:"Ugly",ru:"Некрасивый"},{en:"Fast",ru:"Быстрый"},{en:"Slow",ru:"Медленный"},{en:"Cheap",ru:"Дешёвый"},{en:"Expensive",ru:"Дорогой"},{en:"Easy",ru:"Лёгкий"},{en:"Difficult",ru:"Трудный"},
+    {en:"Apple",ru:"Яблоко"},{en:"Banana",ru:"Банан"},{en:"Orange",ru:"Апельсин"},{en:"Water",ru:"Вода"},{en:"Milk",ru:"Молоко"},{en:"Bread",ru:"Хлеб"},{en:"Meat",ru:"Мясо"},{en:"Fish",ru:"Рыба"},{en:"Egg",ru:"Яйцо"},{en:"Sugar",ru:"Сахар"},
+    {en:"Salt",ru:"Соль"},{en:"Coffee",ru:"Кофе"},{en:"Tea",ru:"Чай"},{en:"Juice",ru:"Сок"},{en:"Red",ru:"Красный"},{en:"Green",ru:"Зелёный"},{en:"Blue",ru:"Синий"},{en:"Yellow",ru:"Жёлтый"},{en:"Black",ru:"Чёрный"},{en:"White",ru:"Белый"},
+    {en:"One",ru:"Один"},{en:"Two",ru:"Два"},{en:"Three",ru:"Три"},{en:"Four",ru:"Четыре"},{en:"Five",ru:"Пять"},{en:"Six",ru:"Шесть"},{en:"Seven",ru:"Семь"},{en:"Eight",ru:"Восемь"},{en:"Nine",ru:"Девять"},{en:"Ten",ru:"Десять"},
+    {en:"Mother",ru:"Мать"},{en:"Father",ru:"Отец"},{en:"Brother",ru:"Брат"},{en:"Sister",ru:"Сестра"},{en:"Son",ru:"Сын"},{en:"Daughter",ru:"Дочь"},{en:"Grandmother",ru:"Бабушка"},{en:"Grandfather",ru:"Дедушка"},{en:"Uncle",ru:"Дядя"},{en:"Aunt",ru:"Тётя"},
+    {en:"Dog",ru:"Собака"},{en:"Cat",ru:"Кошка"},{en:"Bird",ru:"Птица"},{en:"Fish",ru:"Рыба"},{en:"Horse",ru:"Лошадь"},{en:"Cow",ru:"Корова"},{en:"Pig",ru:"Свинья"},{en:"Mouse",ru:"Мышь"},{en:"Bear",ru:"Медведь"},{en:"Elephant",ru:"Слон"},
+    {en:"Sun",ru:"Солнце"},{en:"Moon",ru:"Луна"},{en:"Star",ru:"Звезда"},{en:"Rain",ru:"Дождь"},{en:"Snow",ru:"Снег"},{en:"Wind",ru:"Ветер"},{en:"Cloud",ru:"Облако"},{en:"Sky",ru:"Небо"},{en:"Tree",ru:"Дерево"},{en:"Flower",ru:"Цветок"},
+    {en:"Car",ru:"Машина"},{en:"Bus",ru:"Автобус"},{en:"Train",ru:"Поезд"},{en:"Plane",ru:"Самолёт"},{en:"Bike",ru:"Велосипед"},{en:"Ship",ru:"Корабль"},{en:"Taxi",ru:"Такси"},{en:"Doctor",ru:"Врач"},{en:"Teacher",ru:"Учитель"},{en:"Student",ru:"Студент"},
+    {en:"Work",ru:"Работа"},{en:"Job",ru:"Работа"},{en:"Home",ru:"Дом"},{en:"House",ru:"Дом"},{en:"Apartment",ru:"Квартира"},{en:"Room",ru:"Комната"},{en:"Kitchen",ru:"Кухня"},{en:"Bathroom",ru:"Ванная"},{en:"Bedroom",ru:"Спальня"},{en:"Living room",ru:"Гостиная"},
+    {en:"Door",ru:"Дверь"},{en:"Window",ru:"Окно"},{en:"Wall",ru:"Стена"},{en:"Floor",ru:"Пол"},{en:"Table",ru:"Стол"},{en:"Chair",ru:"Стул"},{en:"Bed",ru:"Кровать"},{en:"Sofa",ru:"Диван"},{en:"TV",ru:"Телевизор"},{en:"Phone",ru:"Телефон"},
+    {en:"Computer",ru:"Компьютер"},{en:"Internet",ru:"Интернет"},{en:"Email",ru:"Электронная почта"},{en:"Website",ru:"Веб-сайт"},{en:"Money",ru:"Деньги"},{en:"Price",ru:"Цена"},{en:"Buy",ru:"Покупать"},{en:"Sell",ru:"Продавать"},{en:"Shop",ru:"Магазин"},{en:"Market",ru:"Рынок"},
+    {en:"Eat",ru:"Есть"},{en:"Drink",ru:"Пить"},{en:"Sleep",ru:"Спать"},{en:"Run",ru:"Бежать"},{en:"Walk",ru:"Идти"},{en:"Go",ru:"Идти"},{en:"Come",ru:"Приходить"},{en:"Give",ru:"Давать"},{en:"Take",ru:"Брать"},{en:"Love",ru:"Любить"},
+    {en:"Like",ru:"Нравиться"},{en:"Hate",ru:"Ненавидеть"},{en:"Want",ru:"Хотеть"},{en:"Need",ru:"Нуждаться"},{en:"Have",ru:"Иметь"},{en:"Can",ru:"Мочь"},{en:"Must",ru:"Должен"},{en:"Know",ru:"Знать"},{en:"Think",ru:"Думать"},{en:"Believe",ru:"Верить"},
+    {en:"See",ru:"Видеть"},{en:"Look",ru:"Смотреть"},{en:"Watch",ru:"Смотреть"},{en:"Listen",ru:"Слушать"},{en:"Hear",ru:"Слышать"},{en:"Speak",ru:"Говорить"},{en:"Talk",ru:"Разговаривать"},{en:"Say",ru:"Сказать"},{en:"Tell",ru:"Рассказывать"},{en:"Ask",ru:"Спрашивать"},
+    {en:"Answer",ru:"Отвечать"},{en:"Help",ru:"Помогать"},{en:"Wait",ru:"Ждать"},{en:"Start",ru:"Начинать"},{en:"Finish",ru:"Заканчивать"},{en:"Open",ru:"Открывать"},{en:"Close",ru:"Закрывать"},{en:"Turn on",ru:"Включать"},{en:"Turn off",ru:"Выключать"},{en:"Use",ru:"Использовать"},
+    {en:"Learn",ru:"Учить"},{en:"Study",ru:"Изучать"},{en:"Read",ru:"Читать"},{en:"Write",ru:"Писать"},{en:"Draw",ru:"Рисовать"},{en:"Play",ru:"Играть"},{en:"Work",ru:"Работать"},{en:"Rest",ru:"Отдыхать"},{en:"Travel",ru:"Путешествовать"},{en:"Drive",ru:"Водить"},
+    {en:"Time",ru:"Время"},{en:"Day",ru:"День"},{en:"Night",ru:"Ночь"},{en:"Morning",ru:"Утро"},{en:"Evening",ru:"Вечер"},{en:"Today",ru:"Сегодня"},{en:"Tomorrow",ru:"Завтра"},{en:"Yesterday",ru:"Вчера"},{en:"Week",ru:"Неделя"},{en:"Month",ru:"Месяц"},
+    {en:"Year",ru:"Год"},{en:"Monday",ru:"Понедельник"},{en:"Tuesday",ru:"Вторник"},{en:"Wednesday",ru:"Среда"},{en:"Thursday",ru:"Четверг"},{en:"Friday",ru:"Пятница"},{en:"Saturday",ru:"Суббота"},{en:"Sunday",ru:"Воскресенье"},{en:"January",ru:"Январь"},{en:"February",ru:"Февраль"},
+    {en:"March",ru:"Март"},{en:"April",ru:"Апрель"},{en:"May",ru:"Май"},{en:"June",ru:"Июнь"},{en:"July",ru:"Июль"},{en:"August",ru:"Август"},{en:"September",ru:"Сентябрь"},{en:"October",ru:"Октябрь"},{en:"November",ru:"Ноябрь"},{en:"December",ru:"Декабрь"},
+    {en:"Shirt",ru:"Рубашка"},{en:"Pants",ru:"Штаны"},{en:"Dress",ru:"Платье"},{en:"Skirt",ru:"Юбка"},{en:"Shoes",ru:"Обувь"},{en:"Hat",ru:"Шляпа"},{en:"Jacket",ru:"Куртка"},{en:"Coat",ru:"Пальто"},{en:"Scarf",ru:"Шарф"},{en:"Gloves",ru:"Перчатки"},
+    {en:"Head",ru:"Голова"},{en:"Face",ru:"Лицо"},{en:"Eye",ru:"Глаз"},{en:"Ear",ru:"Ухо"},{en:"Nose",ru:"Нос"},{en:"Mouth",ru:"Рот"},{en:"Hair",ru:"Волосы"},{en:"Hand",ru:"Рука"},{en:"Arm",ru:"Рука (от плеча)"},{en:"Leg",ru:"Нога"},
+    {en:"Foot",ru:"Стопа"},{en:"Heart",ru:"Сердце"},{en:"Brain",ru:"Мозг"},{en:"Blood",ru:"Кровь"},{en:"Bone",ru:"Кость"},{en:"Skin",ru:"Кожа"},{en:"Football",ru:"Футбол"},{en:"Basketball",ru:"Баскетбол"},{en:"Tennis",ru:"Теннис"},{en:"Swimming",ru:"Плавание"},
+    {en:"Run",ru:"Бег"},{en:"Game",ru:"Игра"},{en:"Team",ru:"Команда"},{en:"Player",ru:"Игрок"},{en:"Coach",ru:"Тренер"},{en:"Win",ru:"Выиграть"},{en:"Lose",ru:"Проиграть"},{en:"Score",ru:"Счёт"},{en:"Street",ru:"Улица"},{en:"Road",ru:"Дорога"},
+    {en:"Building",ru:"Здание"},{en:"Park",ru:"Парк"},{en:"Square",ru:"Площадь"},{en:"Bridge",ru:"Мост"},{en:"Station",ru:"Станция"},{en:"Airport",ru:"Аэропорт"},{en:"Hotel",ru:"Отель"},{en:"Restaurant",ru:"Ресторан"},{en:"Cafe",ru:"Кафе"},{en:"School",ru:"Школа"},
+    {en:"University",ru:"Университет"},{en:"Office",ru:"Офис"},{en:"Bank",ru:"Банк"},{en:"Hospital",ru:"Больница"},{en:"Pharmacy",ru:"Аптека"},{en:"Police",ru:"Полиция"},{en:"Fire",ru:"Пожар"},{en:"Angry",ru:"Злой"},{en:"Scared",ru:"Испуганный"},{en:"Excited",ru:"Взволнованный"},
+    {en:"Tired",ru:"Уставший"},{en:"Bored",ru:"Скучающий"},{en:"Worried",ru:"Взволнованный (беспокойный)"},{en:"Surprised",ru:"Удивлённый"},{en:"Confused",ru:"Смущённый"},{en:"Proud",ru:"Гордый"},{en:"Jealous",ru:"Ревнивый"},{en:"Menu",ru:"Меню"},{en:"Order",ru:"Заказ"},{en:"Bill",ru:"Счёт"},
+    {en:"Delicious",ru:"Вкусный"},{en:"Waiter",ru:"Официант"},{en:"Fork",ru:"Вилка"},{en:"Knife",ru:"Нож"},{en:"Spoon",ru:"Ложка"},{en:"Plate",ru:"Тарелка"},{en:"Cup",ru:"Чашка"},{en:"Glass",ru:"Стакан"},{en:"Breakfast",ru:"Завтрак"},{en:"Lunch",ru:"Обед"},
+    {en:"Dinner",ru:"Ужин"},{en:"Snack",ru:"Перекус"},{en:"Engineer",ru:"Инженер"},{en:"Lawyer",ru:"Адвокат"},{en:"Scientist",ru:"Учёный"},{en:"Artist",ru:"Художник"},{en:"Musician",ru:"Музыкант"},{en:"Chef",ru:"Шеф-повар"},{en:"Pilot",ru:"Пилот"},{en:"Journalist",ru:"Журналист"},
+    {en:"Business",ru:"Бизнес"},{en:"Company",ru:"Компания"},{en:"Manager",ru:"Менеджер"},{en:"Marketing",ru:"Маркетинг"},{en:"Sales",ru:"Продажи"},{en:"Customer",ru:"Клиент"},{en:"Product",ru:"Продукт"},{en:"Service",ru:"Услуга"},{en:"Profit",ru:"Прибыль"},{en:"Investment",ru:"Инвестиция"},
+    {en:"Research",ru:"Исследование"},{en:"Experiment",ru:"Эксперимент"},{en:"Theory",ru:"Теория"},{en:"Biology",ru:"Биология"},{en:"Chemistry",ru:"Химия"},{en:"Physics",ru:"Физика"},{en:"Mathematics",ru:"Математика"},{en:"Laboratory",ru:"Лаборатория"},{en:"Discovery",ru:"Открытие"},{en:"Invention",ru:"Изобретение"},
+    {en:"Government",ru:"Правительство"},{en:"Law",ru:"Закон"},{en:"Freedom",ru:"Свобода"},{en:"Rights",ru:"Права"},{en:"President",ru:"Президент"},{en:"Election",ru:"Выборы"},{en:"Vote",ru:"Голосовать"},{en:"Democracy",ru:"Демократия"},{en:"Peace",ru:"Мир"},{en:"War",ru:"Война"},
+    {en:"Art",ru:"Искусство"},{en:"Music",ru:"Музыка"},{en:"Painting",ru:"Картина"},{en:"Theatre",ru:"Театр"},{en:"Cinema",ru:"Кино"},{en:"Concert",ru:"Концерт"},{en:"Book",ru:"Книга"},{en:"Poem",ru:"Стихотворение"},{en:"Museum",ru:"Музей"},{en:"Sculpture",ru:"Скульптура"},
+    {en:"Garden",ru:"Сад"},{en:"Mountain",ru:"Гора"},{en:"River",ru:"Река"},{en:"Lake",ru:"Озеро"},{en:"Forest",ru:"Лес"},{en:"Beach",ru:"Пляж"},{en:"Ocean",ru:"Океан"},{en:"Island",ru:"Остров"},{en:"Weather",ru:"Погода"},{en:"Temperature",ru:"Температура"},
+    {en:"Summer",ru:"Лето"},{en:"Winter",ru:"Зима"},{en:"Spring",ru:"Весна"},{en:"Autumn",ru:"Осень"},{en:"Holiday",ru:"Праздник"},{en:"Vacation",ru:"Отпуск"},{en:"Trip",ru:"Поездка"},{en:"Journey",ru:"Путешествие"},{en:"Map",ru:"Карта"},{en:"Ticket",ru:"Билет"},
+    {en:"Passport",ru:"Паспорт"},{en:"Luggage",ru:"Багаж"},{en:"Suitcase",ru:"Чемодан"},{en:"Camera",ru:"Камера"},{en:"Photo",ru:"Фото"},{en:"Memory",ru:"Память"},{en:"Dream",ru:"Мечта"},{en:"Future",ru:"Будущее"},{en:"Past",ru:"Прошлое"},{en:"Present",ru:"Настоящее"},
+    {en:"Life",ru:"Жизнь"},{en:"Death",ru:"Смерть"},{en:"Birth",ru:"Рождение"},{en:"Marriage",ru:"Брак"},{en:"Divorce",ru:"Развод"},{en:"Child",ru:"Ребёнок"},{en:"Adult",ru:"Взрослый"},{en:"Friend",ru:"Друг"},{en:"Enemy",ru:"Враг"},{en:"Neighbor",ru:"Сосед"},
+    {en:"Success",ru:"Успех"},{en:"Failure",ru:"Неудача"},{en:"Opportunity",ru:"Возможность"},{en:"Challenge",ru:"Вызов"},{en:"Solution",ru:"Решение"},{en:"Problem",ru:"Проблема"},{en:"Advantage",ru:"Преимущество"},{en:"Disadvantage",ru:"Недостаток"},{en:"Quality",ru:"Качество"},{en:"Quantity",ru:"Количество"},
+    {en:"Increase",ru:"Увеличивать"},{en:"Decrease",ru:"Уменьшать"},{en:"Improve",ru:"Улучшать"},{en:"Develop",ru:"Развивать"},{en:"Create",ru:"Создавать"},{en:"Destroy",ru:"Разрушать"},{en:"Protect",ru:"Защищать"},{en:"Attack",ru:"Атаковать"},{en:"Support",ru:"Поддерживать"},{en:"Oppose",ru:"Противодействовать"}
+  ];
+  document.getElementById('dictionary-list').innerHTML = `<div style="padding:0.8rem; background:#f0fff0;"><span style="font-weight:800;">🐛 Словарь Undo содержит ${dict.length} слов. И это только начало!</span></div>` + dict.map(d=>`<div class="dict-item"><span class="dict-word">${d.en}</span><span class="dict-trans">${d.ru}</span></div>`).join('');
+}
+function renderAlphabet(){ let alphabet=[{letter:"A",sound:"эй"},{letter:"B",sound:"би"},{letter:"C",sound:"си"},{letter:"D",sound:"ди"},{letter:"E",sound:"и"},{letter:"F",sound:"эф"},{letter:"G",sound:"джи"},{letter:"H",sound:"эйч"},{letter:"I",sound:"ай"},{letter:"J",sound:"джей"},{letter:"K",sound:"кей"},{letter:"L",sound:"эл"},{letter:"M",sound:"эм"},{letter:"N",sound:"эн"},{letter:"O",sound:"оу"},{letter:"P",sound:"пи"},{letter:"Q",sound:"кью"},{letter:"R",sound:"ар"},{letter:"S",sound:"эс"},{letter:"T",sound:"ти"},{letter:"U",sound:"ю"},{letter:"V",sound:"ви"},{letter:"W",sound:"дабл-ю"},{letter:"X",sound:"экс"},{letter:"Y",sound:"уай"},{letter:"Z",sound:"зед"}]; document.getElementById('alphabet-grid').innerHTML=alphabet.map(a=>`<div class="alphabet-letter">${a.letter}<small>${a.sound}</small></div>`).join(''); }
+</script>
+</body>
+</html>

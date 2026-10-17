@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Православный онлайн-монастырь — Подача записок — От ValGDZ</title>
+<link rel="stylesheet" href="monastery.css">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113657454', 'ym');
+
+    ym(113657454, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113657454" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<header class="monastery-header">
+  <div class="cross">☦</div>
+  <h1>Православный онлайн-монастырь</h1>
+  <p class="subtitle">«Приидите ко Мне вси труждающиися и обремененнии, и Аз упокою вы» (Мф. 11:28)</p>
+  <p class="dedication">Подача церковных записок: о здравии и о упокоении</p>
+</header>
+
+<main class="monastery">
+
+  <!-- Иконостас -->
+  <section class="iconostasis">
+    <div class="icon" data-saint="Господа Иисуса Христа" data-name="Господь Иисус Христос">
+      <div class="icon-img">☦</div>
+      <span>Господь<br>Иисус Христос</span>
+    </div>
+    <div class="icon" data-saint="Пресвятой Богородицы" data-name="Пресвятая Богородица">
+      <div class="icon-img">✚</div>
+      <span>Пресвятая<br>Богородица</span>
+    </div>
+    <div class="icon" data-saint="святителя Николая Чудотворца" data-name="Святитель Николай">
+      <div class="icon-img">✝</div>
+      <span>Святитель<br>Николай</span>
+    </div>
+    <div class="icon" data-saint="преподобного Сергия Радонежского" data-name="Преподобный Сергий">
+      <div class="icon-img">✝</div>
+      <span>Преподобный<br>Сергий</span>
+    </div>
+    <div class="icon" data-saint="преподобного Серафима Саровского" data-name="Преподобный Серафим">
+      <div class="icon-img">✝</div>
+      <span>Преподобный<br>Серафим</span>
+    </div>
+  </section>
+
+  <!-- Форма записки -->
+  <section class="note-form">
+    <h2>Церковная записка</h2>
+
+    <!-- Род поминовения -->
+    <div class="form-row">
+      <div class="form-group grow">
+        <label>Род поминовения</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="noteType" value="health" checked>
+            <span>О здравии</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="noteType" value="repose">
+            <span>О упокоении</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Имена -->
+    <div class="form-row">
+      <div class="form-group grow">
+        <label for="noteNames">Имя</label>
+        <textarea id="noteNames" rows="3" maxlength="400" placeholder="Например: раба Божия Иоанна, рабы Божией Марии, младенца Алексия" autocomplete="off"></textarea>
+       
+      </div>
+    </div>
+
+    <!-- Прошение -->
+    <div class="form-row">
+      <div class="form-group grow">
+        <label for="notePetition">Прошение (необязательно)</label>
+        <input type="text" id="notePetition" placeholder="Например: об успешной сдаче экзамена, о помощи в учении" maxlength="120" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="note-actions">
+      <button id="submitNoteBtn" class="main-btn">📜 Подать записку</button>
+      <button id="resetBtn" class="secondary-btn">Убрать все записки</button>
+    </div>
+
+    <p class="note-hint" id="noteHint">Укажите имена — и записка будет подана.</p>
+  </section>
+
+  <!-- Список поданных записок -->
+  <section class="notes-list" id="notesList">
+    <p class="placeholder">Записки ещё не поданы.</p>
+  </section>
+
+  <!-- Молитва -->
+  <section class="prayer-text" id="prayerText">
+    <p class="placeholder">Выберите род поминовения — и здесь явится молитва.</p>
+  </section>
+
+  <!-- Управление -->
+  <section class="stats">
+    <span>Записок подано: <b id="noteCount">0</b></span>
+  </section>
+
+</main>
+
+<footer class="monastery-footer">
+  <p>«Молитеся друг за друга, яко да исцелеете» (Иак. 5:16)</p>
+  <p class="small">Онлайн-монастырь создан для молитвенной памяти.</p>
+</footer>
+
+<script src="monastery.js"></script>
+</body>
+</html>
