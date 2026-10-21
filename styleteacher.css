@@ -1,19 +1,40 @@
-button
-{
-  height: 50px;
-  border-color: green;
-}
-
 * {
   box-sizing: border-box;
 }
 
-html, body { 
+html, body {
   margin: 0;
   padding: 0;
+  font-family: sans-serif; /* Базовый системный шрифт для аккуратного вида */
 }
 
+/* ====== Кнопки ====== */
+button {
+  height: 50px;
+  padding: 0 24px;
+  border: 2px solid green; /* Заменили border-color на полное свойство для исключения дефолтных рамок */
+  border-radius: 6px;
+  background-color: transparent;
+  color: green;
+  font-size: clamp(0.95rem, 2.3vw, 1.05rem);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
 
+/* Эффект наведения на кнопку */
+button:hover {
+  background-color: green;
+  color: #ffffff;
+}
+
+/* Эффект клика по кнопке */
+button:active {
+  transform: scale(0.98);
+}
 
 /* ====== Заголовки ====== */
 h1, h2, h3, h4, h5, h6 {
@@ -54,7 +75,21 @@ strong {
 
 /* ====== Ссылки ====== */
 a {
+  color: green;
   text-decoration: none;
-  display: block;
+  display: inline-block; /* Изменено с block, чтобы ссылка не растягивалась на всю ширину страницы */
   margin-bottom: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Эффект наведения на ссылку */
+a:hover {
+  color: darkgreen;
+  text-decoration: underline;
+}
+
+/* Эффект клика по ссылке */
+a:active {
+  opacity: 0.8;
 }
