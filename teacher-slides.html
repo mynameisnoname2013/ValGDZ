@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ValGDZ. teacher-slides</title>
+<style id="ps"></style>
+<style>
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+:root{--ui:#fdfaf4;--pn:#fff;--ln:#e6dfd0;--tx:#2a2620;--mu:#8a8272;--ac:#2563eb}
+body{margin:0;font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--tx);background:var(--ui)}
+#app{display:grid;grid-template-rows:auto 1fr;height:100vh}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 14px;background:var(--pn);border-bottom:1px solid var(--ln)}
+header b{font-size:16px;margin-right:4px}
+header input.t{font-size:15px;font-weight:600;border:1px solid transparent;border-radius:8px;padding:6px 8px;min-width:200px;background:transparent}
+header input.t:hover,header input.t:focus{border-color:var(--ln);background:#fff;outline:0}
+.sp{flex:1}
+button,select,input,textarea{font:inherit;color:inherit}
+button,select{border:1px solid var(--ln);background:#fff;border-radius:8px;padding:6px 11px;cursor:pointer}
+button:hover{border-color:var(--ac)}
+button.p{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+main{display:grid;grid-template-columns:200px 1fr 300px;min-height:0}
+aside{background:var(--pn);overflow:auto;padding:10px}
+#list{border-right:1px solid var(--ln)}
+#right{border-left:1px solid var(--ln)}
+.th{position:relative;margin-bottom:10px;border:2px solid var(--ln);border-radius:8px;cursor:pointer;overflow:hidden;background:#fff}
+.th.on{border-color:var(--ac)}
+.th i{position:absolute;left:4px;top:3px;font:600 11px system-ui;background:rgba(0,0,0,.55);color:#fff;border-radius:4px;padding:0 5px;z-index:2}
+.tb{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.tb button{padding:4px 8px;flex:1}
+#stage{display:flex;align-items:center;justify-content:center;padding:20px;min-width:0;background:#efe9db}
+#stage>div{box-shadow:0 8px 30px rgba(60,40,0,.25);border-radius:4px;overflow:hidden}
+h4{margin:14px 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mu)}
+#lay{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+#lay button{padding:6px 4px;font-size:13px}
+#lay button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+label{display:block;margin:10px 0 0;font-size:12px;color:var(--mu)}
+label input:not([type=file]),label textarea{display:block;width:100%;margin-top:4px;border:1px solid var(--ln);border-radius:8px;padding:7px 9px;color:var(--tx);background:#fff;resize:vertical}
+.row{display:flex;gap:6px}.row>*{flex:1}
+/* ===== slide ===== */
+.sl{width:1280px;height:720px;position:relative;background:var(--bg);color:var(--fg);font-family:var(--ff);overflow:hidden;padding:70px 90px 80px;display:flex;flex-direction:column}
+.sl:before{content:"";position:absolute;left:0;top:0;bottom:0;width:18px;background:var(--ac)}
+.sl h2{font-size:58px;margin:0 0 34px;line-height:1.1}
+.sl ul,.sl ol{margin:0;padding-left:44px;line-height:1.38}
+.sl li{margin-bottom:10px}.sl li::marker{color:var(--ac);font-weight:700}
+.sl .ft{position:absolute;left:90px;right:60px;bottom:24px;display:flex;justify-content:space-between;font-size:20px;opacity:.6}
+.L-title{justify-content:center}
+.L-title h1{font-size:92px;line-height:1.05;margin:0 0 30px}
+.L-title .bar{width:140px;height:10px;background:var(--ac);border-radius:5px;margin-bottom:34px}
+.L-title p{font-size:42px;margin:0;opacity:.8}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:50px;flex:1;min-height:0}
+.cols>div{background:var(--sf);border-radius:22px;padding:26px 30px;overflow:hidden}
+.im{display:grid;grid-template-columns:1fr 1fr;gap:50px;flex:1;min-height:0;align-items:center}
+.im .pic{height:100%;border-radius:22px;background:var(--sf) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:30px;opacity:.9}
+.L-quote{justify-content:center}
+.L-quote blockquote{margin:0;font-size:58px;line-height:1.25;font-style:italic;position:relative;padding-top:50px}
+.L-quote blockquote:before{content:"“";position:absolute;top:-40px;left:-6px;font-size:200px;color:var(--ac);line-height:1;font-style:normal}
+.L-quote cite{display:block;margin-top:30px;font-size:34px;color:var(--ac);font-style:normal;font-weight:700}
+.L-section{background:var(--ac)!important;color:#fff!important;justify-content:center}
+.L-section:before{display:none}
+.L-section h1{font-size:110px;margin:0 0 20px;line-height:1.05}
+.L-section p{font-size:42px;margin:0;opacity:.85}
+.badge{align-self:flex-start;background:var(--ac);color:#fff;font:700 24px system-ui;letter-spacing:.1em;padding:6px 20px;border-radius:30px;margin-bottom:18px}
+.ans{margin-top:auto;height:150px;background:repeating-linear-gradient(transparent 0 49px,color-mix(in srgb,var(--fg) 30%,transparent) 49px 51px)}
+
+.sl h3{font-size:40px;margin:0 0 16px;color:var(--ac)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:22px;flex:1;min-height:0}
+.opts>div{background:var(--sf);border-radius:18px;padding:22px 26px;font-size:34px;display:flex;align-items:center;gap:20px}
+.opts b,.plan li:before,.cdg i{background:var(--ac);color:var(--bg);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font:700 30px system-ui;font-style:normal}
+.tl{display:flex;gap:16px;position:relative;margin-top:70px}
+.tl:before{content:"";position:absolute;left:0;right:0;top:14px;height:6px;background:var(--ac);border-radius:3px}
+.tl>div{flex:1;position:relative;padding-top:56px}
+.tl>div:before{content:"";position:absolute;top:0;left:0;width:34px;height:34px;border-radius:50%;background:var(--bg);border:8px solid var(--ac)}
+.tl b{display:block;font-size:42px;color:var(--ac);margin-bottom:8px}.tl span{display:block;font-size:28px;line-height:1.3}
+.L-definition,.L-discuss{justify-content:center}
+.term{font-size:88px;line-height:1;margin:0 0 24px;color:var(--ac);font-weight:800}
+.def{font-size:44px;line-height:1.3;margin-bottom:30px}
+.ex{font-size:32px;background:var(--sf);border-radius:18px;padding:22px 28px;border-left:10px solid var(--ac)}
+.cdg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;flex:1;min-height:0}
+.cdg>div{background:var(--sf);border-top:10px solid var(--ac);border-radius:18px;padding:28px;font-size:32px;line-height:1.3}
+.cdg i{margin-bottom:16px}
+.plan{list-style:none;padding:0!important}
+.plan li{display:flex;align-items:center;gap:24px;margin-bottom:18px}
+.plan{counter-reset:n}.plan li{counter-increment:n}.plan li:before{content:counter(n)}
+.plan.goals li:before{content:"✓"}
+table{width:100%;border-collapse:collapse;font-size:32px}
+th{background:var(--ac);color:var(--bg);text-align:left}
+td,th{padding:14px 20px;border:2px solid var(--sf)}tr:nth-child(even) td{background:var(--sf)}
+.fm{font:italic 84px Georgia,serif;text-align:center;background:var(--sf);border-radius:24px;padding:46px 30px;margin-bottom:30px}
+.hw li::marker{content:"☐  ";color:var(--ac)}
+.big{font-size:68px;line-height:1.2;font-weight:700}
+.L-photo{padding:0}.L-photo:before{display:none}
+.full{position:absolute;inset:0;background:var(--sf) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:36px}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:70px 70px 34px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font-size:50px;font-weight:700}
+/* ===== present ===== */
+#pres{display:none;position:fixed;inset:0;background:#000;z-index:99;align-items:center;justify-content:center;cursor:pointer}
+#pres.on{display:flex}
+#pres small{position:fixed;bottom:10px;right:14px;color:#888;font:12px system-ui}
+/* ===== print ===== */
+#pr{display:none}
+.pg{break-after:page;overflow:hidden}.pg:last-child{break-after:auto}
+.hp{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;height:1050px;align-content:start}
+.hp .c{border:1px solid #bbb;padding:6px;font:12px system-ui;color:#000;background:#fff}
+.hp .ln{height:44px;background:repeating-linear-gradient(transparent 0 21px,#aaa 21px 22px)}
+.np{display:grid;grid-template-columns:400px 1fr;gap:20px;margin-bottom:26px;align-items:start;color:#000;font:14px/1.5 system-ui}
+.np .sh{border:1px solid #aaa}.np .nt{min-height:225px;white-space:pre-wrap;background:repeating-linear-gradient(transparent 0 26px,#bbb 26px 27px);line-height:27px}
+@media print{#app,#pres{display:none!important}#pr{display:block}body{background:#fff}}
+@media(max-width:900px){main{grid-template-columns:1fr}#list,#right{max-height:30vh;border:0}}
+</style>
+</head>
+<body>
+<div id="app">
+ <header>
+  <b>🎓 Слайды для урока</b>
+  <input class="t" id="title" placeholder="Название презентации">
+  <select id="th" title="Тема оформления"></select>
+  <select id="ff" title="Шрифт"><option>Без засечек</option><option>С засечками</option><option>Скруглённый</option></select>
+  <input class="t" id="foot" placeholder="Подпись (напр. 7Б · Физика)" style="min-width:150px;font-weight:400">
+  <span class="sp"></span>
+  <select id="dk" title="Новая презентация из шаблона"></select><button id="bsave">💾 Сохранить</button><button id="bopen">📂 Открыть</button>
+  <button id="bshow">▶ Показ</button>
+  <select id="pm"><option value="s">Печать: слайды (1 на страницу)</option><option value="h">Печать: раздатка (6 на А4)</option><option value="n">Печать: заметки (3 на А4)</option></select>
+  <button class="p" id="bprint">🖨 Печать / PDF</button>
+  <input type="file" id="fo" accept=".json" hidden>
+ </header>
+ <main>
+  <aside id="list"><div class="tb"><button id="badd" title="Добавить">＋</button><button id="bdup" title="Дублировать">⧉</button><button id="bup" title="Выше">↑</button><button id="bdn" title="Ниже">↓</button><button id="bdel" title="Удалить">🗑</button></div><select id="pt" style="width:100%;margin-bottom:10px" title="Добавить слайд из шаблона"></select><div id="th-l"></div></aside>
+  <div id="stage"><div id="box"></div></div>
+  <aside id="right"><h4>Макет</h4><div id="lay"></div><h4>Содержание</h4><div id="f"></div></aside>
+ </main>
+</div>
+<div id="pres"><small>← → листать · Esc выход</small></div>
+<div id="pr"></div>
+<script>
+const $=s=>document.querySelector(s),KEY='teacher-slides-v1';
+const TH=[
+ {n:'Школьный синий',bg:'#ffffff',fg:'#1b2a41',ac:'#2563eb',sf:'#e8f0fe'},
+ {n:'Тёплая бумага',bg:'#fbf5e9',fg:'#3b2f2f',ac:'#c2410c',sf:'#f6e7cc'},
+ {n:'Зелёная доска',bg:'#1f3d2f',fg:'#f4f1e8',ac:'#f5c84b',sf:'#2b5442'},
+ {n:'Тёмная',bg:'#14161c',fg:'#eef0f5',ac:'#7dd3fc',sf:'#222634'},
+ {n:'Сирень',bg:'#faf7ff',fg:'#2e1f4d',ac:'#7c3aed',sf:'#ece3fb'},
+ {n:'Мята',bg:'#f0fbf8',fg:'#12332e',ac:'#0d9488',sf:'#d3f2ec'},
+ {n:'Чёрно-белая (экономия тонера)',bg:'#ffffff',fg:'#111111',ac:'#444444',sf:'#eeeeee'}];
+const FF=['system-ui,"Segoe UI",Arial,sans-serif','Georgia,"Times New Roman",serif','"Trebuchet MS","Segoe UI",sans-serif'];
+const L={title:'Титульный',bullets:'Список',two:'Две колонки',image:'Картинка + текст',quote:'Цитата',section:'Раздел',task:'Задание',quiz:'Вопрос теста',timeline:'Хронология',compare:'Сравнение',definition:'Определение',steps:'Алгоритм',plan:'План урока',goals:'Цели урока',table:'Таблица',formula:'Формула',homework:'Домашнее задание',discuss:'Обсуждение',cards:'Карточки',photo:'Фото на слайд'};
+let D=load(),pi=0;
+function demo(){return{t:'Фотосинтез',th:0,ff:0,foot:'6 класс · Биология',cur:0,s:[
+ {layout:'title',title:'Фотосинтез',body:'Как растения делают еду из света',notes:'Начать с вопроса: чем питаются растения?'},
+ {layout:'bullets',title:'Что нужно растению',body:'Свет\nВода из почвы\nУглекислый газ из воздуха\nХлорофилл в листьях',notes:''},
+ {layout:'quote',title:'К. А. Тимирязев',body:'Растение — посредник между небом и землёй',notes:''},
+ {layout:'task',title:'Проверь себя',body:'Назовите три условия фотосинтеза.\nГде в клетке находится хлорофилл?\nЧто выделяется в воздух?',notes:'Ответы: свет, вода, CO₂; хлоропласты; кислород.'}]}}
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&d.s&&d.s.length)return d}catch(e){}return demo()}
+let st;function save(){clearTimeout(st);st=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}},400)}
+const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lines=t=>String(t||'').split('\n').filter(x=>x.trim());
+function sl(s,i){
+ const t=TH[D.th],a=lines(s.body),b=lines(s.body2),n=a.length;
+ const fs=n>7?28:n>5?33:n>3?38:42,li=x=>x.map(v=>`<li>${esc(v)}</li>`).join('');
+ let h='';
+ switch(s.layout){
+  case'title':h=`<h1>${esc(s.title)}</h1><div class=bar></div><p>${a.map(esc).join('<br>')}</p>`;break;
+  case'bullets':h=`<h2>${esc(s.title)}</h2><ul style="font-size:${fs}px">${li(a)}</ul>`;break;
+  case'two':h=`<h2>${esc(s.title)}</h2><div class=cols><div><ul style="font-size:${Math.min(fs,36)}px;padding-left:30px">${li(a)}</ul></div><div><ul style="font-size:${Math.min(fs,36)}px;padding-left:30px">${li(b)}</ul></div></div>`;break;
+  case'image':h=`<h2>${esc(s.title)}</h2><div class=im><div class=pic style="${s.img?`background-image:url(${s.img})`:''}">${s.img?'':'🖼 Добавьте изображение'}</div><ul style="font-size:${Math.min(fs,36)}px;padding-left:30px">${li(a)}</ul></div>`;break;
+  case'quote':h=`<blockquote>${a.map(esc).join('<br>')}<cite>— ${esc(s.title)}</cite></blockquote>`;break;
+  case'section':h=`<h1>${esc(s.title)}</h1><p>${a.map(esc).join('<br>')}</p>`;break;
+  case'task':h=`<span class=badge>ЗАДАНИЕ</span><h2 style="margin-bottom:24px">${esc(s.title)}</h2><ol style="font-size:${Math.min(fs,36)}px">${li(a)}</ol><div class=ans></div>`;break;
+  case'quiz':h=`<span class=badge>ВОПРОС</span><h2 style="margin-bottom:26px">${esc(s.title)}</h2><div class=opts>${a.map((v,k)=>`<div><b>${'АБВГДЕ'[k]}</b>${esc(v)}</div>`).join('')}</div>`;break;
+  case'timeline':h=`<h2>${esc(s.title)}</h2><div class=tl>${a.map(v=>{const p=v.split(/\s*[|—]\s*/);return`<div><b>${esc(p[0])}</b><span>${esc(p.slice(1).join(' — '))}</span></div>`}).join('')}</div>`;break;
+  case'compare':h=`<h2>${esc(s.title)}</h2><div class=cols><div><h3>${esc(a[0]||'')}</h3><ul style="font-size:34px;padding-left:30px">${li(a.slice(1))}</ul></div><div><h3>${esc(b[0]||'')}</h3><ul style="font-size:34px;padding-left:30px">${li(b.slice(1))}</ul></div></div>`;break;
+  case'definition':h=`<span class=badge>ЗАПОМНИ</span><div class=term>${esc(s.title)}</div><div class=def>${esc(a[0]||'')}</div>${a.length>1?`<div class=ex><b>Пример:</b> ${a.slice(1).map(esc).join('<br>')}</div>`:''}`;break;
+  case'steps':h=`<h2>${esc(s.title)}</h2><div class=cdg>${a.map((v,k)=>`<div><i>${k+1}</i>${esc(v)}</div>`).join('')}</div>`;break;
+  case'cards':h=`<h2>${esc(s.title)}</h2><div class=cdg>${a.map(v=>`<div>${esc(v)}</div>`).join('')}</div>`;break;
+  case'plan':case'goals':h=`<h2>${esc(s.title)}</h2><ol class="plan ${s.layout}" style="font-size:${n>5?32:38}px">${li(a)}</ol>`;break;
+  case'table':h=`<h2>${esc(s.title)}</h2><table>${a.map((r,k)=>`<tr>${r.split('|').map(c=>k?`<td>${esc(c.trim())}</td>`:`<th>${esc(c.trim())}</th>`).join('')}</tr>`).join('')}</table>`;break;
+  case'formula':h=`<h2>${esc(s.title)}</h2><div class=fm>${esc(a[0]||'')}</div><ul style="font-size:32px">${li(a.slice(1))}</ul>`;break;
+  case'homework':h=`<span class=badge>ДОМАШНЕЕ ЗАДАНИЕ</span><h2>${esc(s.title)}</h2><ul class=hw style="font-size:${fs}px">${li(a)}</ul>`;break;
+  case'discuss':h=`<span class=badge>ОБСУДИМ</span><h2>${esc(s.title)}</h2><div class=big>${a.map(esc).join('<br>')}</div>`;break;
+  case'photo':h=`<div class=full style="${s.img?`background-image:url(${s.img})`:''}">${s.img?'':'🖼 Добавьте изображение'}</div><div class=cap>${esc(s.title)}</div>`;break;
+ }
+ const ft=s.layout=='title'||s.layout=='section'||s.layout=='photo'?'':`<div class=ft><span>${esc(D.foot)}</span><span>${i+1}</span></div>`;
+ return`<div class="sl L-${s.layout}" style="--bg:${t.bg};--fg:${t.fg};--ac:${t.ac};--sf:${t.sf};--ff:${FF[D.ff]}">${h}${ft}</div>`}
+const scaled=(h,w)=>`<div style="width:${w}px;height:${w*9/16}px;overflow:hidden;position:relative"><div style="transform:scale(${w/1280});transform-origin:0 0;width:1280px;height:720px">${h}</div></div>`;
+function draw(){
+ const st=$('#stage'),w=Math.max(300,Math.min(st.clientWidth-40,(st.clientHeight-40)*16/9));
+ $('#box').innerHTML=scaled(sl(D.s[D.cur],D.cur),w);
+ $('#th-l').innerHTML=D.s.map((s,i)=>`<div class="th ${i==D.cur?'on':''}" draggable=true data-i=${i}><i>${i+1}</i>${scaled(sl(s,i),176)}</div>`).join('');
+ save()}
+function form(){
+ const s=D.s[D.cur],l=s.layout;
+ $('#lay').innerHTML=Object.entries(L).map(([k,v])=>`<button data-l=${k} class="${k==l?'on':''}">${v}</button>`).join('');
+ const bl={title:'Подзаголовок',quote:'Текст цитаты',section:'Подпись',two:'Левая колонка (строка = пункт)',quiz:'Варианты ответа (строка = вариант)',timeline:'События: «год | событие», строка за строкой',compare:'Левая: 1-я строка — заголовок, далее пункты',definition:'1-я строка — определение, далее примеры',steps:'Шаги (строка = шаг)',cards:'Карточки (строка = карточка)',plan:'Пункты плана',goals:'Цели',table:'Строки; столбцы через | (1-я строка — шапка)',formula:'1-я строка — формула, далее пояснения',homework:'Задания',discuss:'Вопрос для обсуждения'}[l]||'Текст (строка = пункт)';
+ $('#f').innerHTML=`<label>${({quote:'Автор',definition:'Термин',quiz:'Вопрос',photo:'Подпись'})[l]||'Заголовок'}<input data-k=title value="${esc(s.title)}"></label>
+ ${l=='photo'?'':`<label>${bl}<textarea data-k=body rows=7>${esc(s.body)}</textarea></label>`}
+ ${l=='two'||l=='compare'?`<label>Правая колонка${l=='compare'?' (1-я строка — заголовок)':''}<textarea data-k=body2 rows=6>${esc(s.body2)}</textarea></label>`:''}
+ ${l=='image'||l=='photo'?`<label>Изображение<input type=file id=im accept="image/*"></label>${s.img?'<button id=rm style="margin-top:6px">Убрать картинку</button>':''}`:''}
+ <label>Заметки учителя (видны в печати «заметки»)<textarea data-k=notes rows=4>${esc(s.notes)}</textarea></label>`}
+function sel(i){D.cur=Math.max(0,Math.min(D.s.length-1,i));draw();form()}
+function mv(a,b){if(b<0||b>=D.s.length)return;D.s.splice(b,0,D.s.splice(a,1)[0]);D.cur=b;draw();form()}
+$('#th').innerHTML=TH.map((t,i)=>`<option value=${i}>${t.n}</option>`).join('');
+$('#th').onchange=e=>{D.th=+e.target.value;draw()};
+$('#ff').onchange=e=>{D.ff=+e.target.value;draw()};
+$('#title').oninput=e=>{D.t=e.target.value;save()};
+$('#foot').oninput=e=>{D.foot=e.target.value;draw()};
+$('#f').addEventListener('input',e=>{const k=e.target.dataset.k;if(k){D.s[D.cur][k]=e.target.value;draw()}});
+$('#f').addEventListener('change',e=>{if(e.target.id!='im'||!e.target.files[0])return;
+ const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);D.s[D.cur].img=c.toDataURL('image/jpeg',.85);draw();form()};im.src=r.result};r.readAsDataURL(e.target.files[0])});
+$('#f').addEventListener('click',e=>{if(e.target.id=='rm'){D.s[D.cur].img='';draw();form()}});
+$('#lay').onclick=e=>{const l=e.target.dataset.l;if(l){D.s[D.cur].layout=l;draw();form()}};
+$('#th-l').onclick=e=>{const t=e.target.closest('.th');if(t)sel(+t.dataset.i)};
+let dg=null;
+$('#th-l').ondragstart=e=>{const t=e.target.closest('.th');if(t)dg=+t.dataset.i};
+$('#th-l').ondragover=e=>e.preventDefault();
+$('#th-l').ondrop=e=>{const t=e.target.closest('.th');if(t&&dg!==null)mv(dg,+t.dataset.i);dg=null};
+$('#badd').onclick=()=>{D.s.splice(D.cur+1,0,{layout:'bullets',title:'Новый слайд',body:'Первый пункт\nВторой пункт',notes:''});sel(D.cur+1)};
+$('#bdup').onclick=()=>{D.s.splice(D.cur+1,0,JSON.parse(JSON.stringify(D.s[D.cur])));sel(D.cur+1)};
+$('#bdel').onclick=()=>{if(D.s.length<2)return;D.s.splice(D.cur,1);sel(D.cur)};
+$('#bup').onclick=()=>mv(D.cur,D.cur-1);$('#bdn').onclick=()=>mv(D.cur,D.cur+1);
+$('#bsave').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'}));a.download=(D.t||'presentation')+'.json';a.click()};
+$('#bopen').onclick=()=>$('#fo').click();
+$('#fo').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!d.s)throw 0;D=d;init()}catch(x){alert('Не удалось открыть файл')}};r.readAsText(f);e.target.value=''};
+/* показ */
+function show(n){pi=Math.max(0,Math.min(D.s.length-1,n));const w=Math.min(innerWidth,innerHeight*16/9);$('#pres').firstChild&&0;
+ $('#pres').innerHTML=scaled(sl(D.s[pi],pi),w)+'<small>← → листать · Esc выход</small>'}
+$('#bshow').onclick=()=>{$('#pres').classList.add('on');show(D.cur);try{$('#pres').requestFullscreen()}catch(e){}};
+const stop=()=>{$('#pres').classList.remove('on');if(document.fullscreenElement)document.exitFullscreen()};
+$('#pres').onclick=()=>pi>=D.s.length-1?stop():show(pi+1);
+document.addEventListener('keydown',e=>{if(!$('#pres').classList.contains('on'))return;
+ if(['ArrowRight','PageDown',' '].includes(e.key))show(pi+1);else if(['ArrowLeft','PageUp'].includes(e.key))show(pi-1);else if(e.key=='Escape')stop()});
+addEventListener('resize',()=>{if($('#pres').classList.contains('on'))show(pi);else draw()});
+/* печать */
+$('#bprint').onclick=()=>{
+ const m=$('#pm').value,p=$('#pr');let h='',css='';
+ if(m=='s'){css='@page{size:1280px 720px;margin:0}';h=D.s.map((s,i)=>`<div class=pg style="width:1280px;height:720px">${sl(s,i)}</div>`).join('')}
+ if(m=='h'){css='@page{size:A4 portrait;margin:10mm}';for(let i=0;i<D.s.length;i+=6)h+=`<div class=pg><div class=hp>${D.s.slice(i,i+6).map((s,j)=>`<div class=c>${scaled(sl(s,i+j),340)}<div class=ln></div></div>`).join('')}</div></div>`}
+ if(m=='n'){css='@page{size:A4 portrait;margin:12mm}';for(let i=0;i<D.s.length;i+=3)h+=`<div class=pg>${D.s.slice(i,i+3).map((s,j)=>`<div class=np><div class=sh>${scaled(sl(s,i+j),400)}</div><div class=nt>${esc(s.notes)}</div></div>`).join('')}</div>`}
+ $('#ps').textContent=css;p.innerHTML=h;document.title=D.t||'Презентация';setTimeout(()=>window.print(),150)};
+const P={
+ title:['📌 Титульный',{layout:'title',title:'Тема урока',body:'Класс · Предмет'}],
+ goals:['🎯 Цели урока',{layout:'goals',title:'Цели урока',body:'Узнать, что такое …\nНаучиться …\nПрименить знания на практике'}],
+ plan:['📋 План урока',{layout:'plan',title:'План урока',body:'Проверка домашнего задания\nНовая тема\nПрактика\nИтоги и оценки'}],
+ def:['📖 Определение / правило',{layout:'definition',title:'Термин',body:'Определение одним-двумя предложениями.\nПример использования.'}],
+ steps:['🔢 Алгоритм (шаги)',{layout:'steps',title:'Как решать',body:'Прочитай условие\nЗапиши данные\nВыбери формулу\nПроверь ответ'}],
+ formula:['∑ Формула',{layout:'formula',title:'Закон / формула',body:'F = m · a\nF — сила, Н\nm — масса, кг\na — ускорение, м/с²'}],
+ comp:['⚖ Сравнение',{layout:'compare',title:'Сравним',body:'Первое\nПризнак 1\nПризнак 2\nПризнак 3',body2:'Второе\nПризнак 1\nПризнак 2\nПризнак 3'}],
+ time:['🕰 Хронология',{layout:'timeline',title:'Ход событий',body:'1700 | Первое событие\n1750 | Второе событие\n1800 | Третье событие\n1850 | Четвёртое событие'}],
+ table:['📊 Таблица / словарь',{layout:'table',title:'Словарь урока',body:'Слово | Перевод | Пример\napple | яблоко | I eat an apple.\nbook | книга | Open your book.\nschool | школа | I go to school.'}],
+ quiz:['❓ Вопрос теста',{layout:'quiz',title:'Какой ответ верный?',body:'Первый вариант\nВторой вариант\nТретий вариант\nЧетвёртый вариант'}],
+ task:['✏ Практика / задание',{layout:'task',title:'Выполни',body:'Первое задание.\nВторое задание.\nТретье задание.'}],
+ discuss:['💬 Обсуждение в парах',{layout:'discuss',title:'Обсудите в парах (2 минуты)',body:'Почему это важно?'}],
+ reflect:['😊 Рефлексия',{layout:'cards',title:'Рефлексия',body:'😊 Сегодня я узнал…\n🤔 Мне было сложно…\n💡 Хочу узнать ещё…'}],
+ hw:['🏠 Домашнее задание',{layout:'homework',title:'Дома',body:'Параграф № …, вопросы 1–3\nРабочая тетрадь, стр. …\nПодготовить сообщение'}],
+ quote:['❝ Цитата',{layout:'quote',title:'Автор',body:'Текст цитаты'}],
+ section:['🔖 Раздел',{layout:'section',title:'Новый раздел',body:'Подзаголовок'}],
+ photo:['🖼 Фото на весь слайд',{layout:'photo',title:'Подпись к фото',body:''}],
+ bul:['✅ Итоги урока',{layout:'bullets',title:'Итоги урока',body:'Главное, что мы узнали\nЧто нужно запомнить\nЧто повторить дома'}]};
+const DK={'Стандартный урок':['title','goals','plan','def','steps','task','discuss','quiz','reflect','hw'],
+ 'Лекция':['title','plan','section','bul','comp','time','table','quote','bul'],
+ 'Повторение и тест':['title','goals','quiz','quiz','quiz','task','reflect','hw'],
+ 'Урок иностранного языка':['title','goals','table','def','task','discuss','hw'],
+ 'Пустая (один слайд)':['title']};
+const mk=id=>Object.assign({title:'',body:'',notes:''},JSON.parse(JSON.stringify(P[id][1])));
+$('#pt').innerHTML='<option value="">＋ Слайд из шаблона…</option>'+Object.entries(P).map(([k,v])=>`<option value=${k}>${v[0]}</option>`).join('');
+$('#pt').onchange=e=>{if(!e.target.value)return;D.s.splice(D.cur+1,0,mk(e.target.value));e.target.value='';sel(D.cur+1)};
+$('#dk').innerHTML='<option value="">🗂 Новая из шаблона…</option>'+Object.keys(DK).map(k=>`<option>${k}</option>`).join('');
+$('#dk').onchange=e=>{const k=e.target.value;e.target.value='';if(!k||!confirm('Создать «'+k+'»? Несохранённое пропадёт.'))return;D={t:k=='Пустая (один слайд)'?'Новая презентация':k,th:D.th,ff:D.ff,foot:D.foot||'',cur:0,s:DK[k].map(mk)};init()};
+function init(){$('#title').value=D.t||'';$('#th').value=D.th;$('#ff').value=D.ff;$('#foot').value=D.foot||'';D.cur=Math.min(D.cur||0,D.s.length-1);draw();form()}
+init();
+</script>
+</body>
+</html>
