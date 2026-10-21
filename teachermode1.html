@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дневник поведения · Город → Школа → Класс → Ученик</title>
+<link rel="stylesheet" href="styleteacher.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="title-block">
+      <h1>Дневник поведения</h1>
+      <p>Город → Школа → Класс → Ученик → Поступок</p>
+    </div>
+  </header>
+
+  <nav class="crumbs" id="crumbs"></nav>
+  <main id="content"></main>
+
+  <footer class="hint">
+    <span>Данные сохраняются в браузере</span>
+    <span>Добавляй города, школы, классы, учеников</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'schoolBehaviorHierarchy_v2';
+
+  let state = { cities: [], actions: {} };
+  let path = { cityId:null, schoolId:null, classId:null, studentId:null };
+  let currentType = 'good';
+
+  // ============ ДЕМО-ДАННЫЕ ============
+  function createDemoData() {
+    return {
+      cities: [
+        { id:'c1', name:'Москва', schools:[
+          { id:'s1', name:'Школа №123', classes:[
+            { id:'cl1', name:'5 «А»', students:[
+              { id:'st1', name:'Анна Иванова' },
+              { id:'st2', name:'Пётр Смирнов' },
+              { id:'st3', name:'Мария Кузнецова' },
+            ]},
+            { id:'cl2', name:'5 «Б»', students:[
+              { id:'st5', name:'Елена Соколова' },
+            ]}
+          ]},
+          { id:'s2', name:'Гимназия №7', classes:[
+            { id:'cl3', name:'6 «А»', students:[
+              { id:'st7', name:'Ольга Новикова' },
+            ]}
+          ]}
+        ]},
+        { id:'c2', name:'Санкт-Петербург', schools:[
+          { id:'s3', name:'Лицей №45', classes:[
+            { id:'cl4', name:'7 «В»', students:[
+              { id:'st9', name:'София Лебедева' },
+            ]}
+          ]}
+        ]}
+      ],
+      actions: {
+        st1: [
+          { id:101, text:'Помогла с домашним заданием', type:'good', date:new Date(Date.now()-3600000).toISOString() },
+          { id:102, text:'Дежурила в классе', type:'good', date:new Date(Date.now()-86400000).toISOString() },
+        ],
+        st2: [ { id:103, text:'Опоздал на урок', type:'bad', date:new Date(Date.now()-7200000).toISOString() } ],
+        st3: [ { id:104, text:'Выступила на конкурсе', type:'good', date:new Date(Date.now()-172800000).toISOString() } ],
+      }
+    };
+  }
+
+  // ============ ХРАНИЛИЩЕ ============
+  function loadState() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.cities)) {
+          state = { cities: parsed.cities, actions: parsed.actions || {} };
+          return;
+        }
+      } catch(e) {}
+    }
+    const demo = createDemoData();
+    state = { cities: demo.cities, actions: demo.actions };
+    saveState();
+  }
+  function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+  // ============ ХЕЛПЕРЫ ============
+  function uid(prefix) { return prefix + '_' + Date.now() + '_' + Math.floor(Math.random()*1000); }
+
+  function getCity(id) { return state.cities.find(c => c.id === id) || null; }
+  function getSchool(cityId, schoolId) {
+    const c = getCity(cityId); return c ? c.schools.find(s => s.id === schoolId) || null : null;
+  }
+  function getClass(cityId, schoolId, classId) {
+    const s = getSchool(cityId, schoolId); return s ? s.classes.find(c => c.id === classId) || null : null;
+  }
+  function getStudent(cityId, schoolId, classId, studentId) {
+    const c = getClass(cityId, schoolId, classId); return c ? c.students.find(s => s.id === studentId) || null : null;
+  }
+  function findClassById(classId) {
+    for (const city of state.cities)
+      for (const school of city.schools)
+        for (const cls of school.classes)
+          if (cls.id === classId) return cls;
+    return null;
+  }
+
+  function countActions(studentId) {
+    const list = state.actions[studentId] || [];
+    return {
+      good: list.filter(a => a.type === 'good').length,
+      bad: list.filter(a => a.type === 'bad').length
+    };
+  }
+  function totalForClass(classId) {
+    const cls = findClassById(classId);
+    if (!cls) return { good:0, bad:0 };
+    let good = 0, bad = 0;
+    cls.students.forEach(st => { const c = countActions(st.id); good += c.good; bad += c.bad; });
+    return { good, bad };
+  }
+
+  function escapeHtml(text) {
+    const d = document.createElement('div'); d.textContent = text; return d.innerHTML;
+  }
+  function formatDate(iso) {
+    return new Date(iso).toLocaleString('ru-RU', {
+      day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
+    });
+  }
+
+  // ============ МОДАЛЬНОЕ ОКНО ============
+  function openPromptModal({ title, subtitle, placeholder, value = '', confirmText = 'Добавить', onConfirm }) {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `
+      <div class="modal">
+        <h3>${escapeHtml(title)}</h3>
+        ${subtitle ? `<p class="modal-sub">${escapeHtml(subtitle)}</p>` : ''}
+        <div class="input-group">
+          <label>Название</label>
+          <input type="text" id="modalInput" placeholder="${escapeHtml(placeholder||'')}" value="${escapeHtml(value)}" maxlength="80">
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="modalCancel">Отмена</button>
+          <button class="btn btn-primary" id="modalOk">${escapeHtml(confirmText)}</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    const input = overlay.querySelector('#modalInput');
+    setTimeout(() => input.focus(), 30);
+    input.setSelectionRange(input.value.length, input.value.length);
+
+    function close() { overlay.remove(); }
+    function confirm() {
+      const v = input.value.trim();
+      if (!v) { input.focus(); return; }
+      close();
+      onConfirm(v);
+    }
+
+    overlay.querySelector('#modalCancel').addEventListener('click', close);
+    overlay.querySelector('#modalOk').addEventListener('click', confirm);
+    input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); confirm(); } });
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  }
+
+  // ============ РЕНДЕР ============
+  const crumbsEl = document.getElementById('crumbs');
+  const contentEl = document.getElementById('content');
+
+  function renderCrumbs() {
+    const items = [{ label:'Города', active: !path.cityId }];
+    if (path.cityId) {
+      const city = getCity(path.cityId);
+      if (city) items.push({ label: city.name, active: !path.schoolId });
+    }
+    if (path.schoolId) {
+      const s = getSchool(path.cityId, path.schoolId);
+      if (s) items.push({ label: s.name, active: !path.classId });
+    }
+    if (path.classId) {
+      const c = getClass(path.cityId, path.schoolId, path.classId);
+      if (c) items.push({ label: c.name, active: !path.studentId });
+    }
+    if (path.studentId) {
+      const st = getStudent(path.cityId, path.schoolId, path.classId, path.studentId);
+      if (st) items.push({ label: st.name, active: true });
+    }
+
+    crumbsEl.innerHTML = items.map((it, i) => `
+      <span class="crumb ${it.active ? 'active' : ''}" data-level="${i}">${escapeHtml(it.label)}</span>
+      ${i < items.length-1 ? '<span class="sep">›</span>' : ''}
+    `).join('');
+
+    crumbsEl.querySelectorAll('.crumb').forEach(el => {
+      el.addEventListener('click', () => {
+        const level = Number(el.dataset.level);
+        if (level === 0) path = { cityId:null, schoolId:null, classId:null, studentId:null };
+        else if (level === 1) path = { ...path, schoolId:null, classId:null, studentId:null };
+        else if (level === 2) path = { ...path, classId:null, studentId:null };
+        else if (level === 3) path = { ...path, studentId:null };
+        render();
+      });
+    });
+  }
+
+  function render() {
+    renderCrumbs();
+    contentEl.innerHTML = '';
+    if (!path.cityId) { renderCities(); return; }
+    if (!path.schoolId) { renderSchools(); return; }
+    if (!path.classId) { renderClasses(); return; }
+    if (!path.studentId) { renderStudents(); return; }
+    renderActions();
+  }
+
+  /* ============ ГОРОДА ============ */
+  function renderCities() {
+    contentEl.innerHTML = `
+      <div class="actions">
+        <button class="btn btn-primary" id="addCityBtn">+ Добавить город</button>
+      </div>
+      <div class="grid" id="cityGrid"></div>
+    `;
+
+    const grid = document.getElementById('cityGrid');
+    if (state.cities.length === 0) {
+      grid.innerHTML = `<div class="empty">Пока нет городов. Добавьте первый!</div>`;
+    } else {
+      grid.innerHTML = state.cities.map(city => `
+        <div class="tile" data-city="${city.id}">
+          <div class="tile-name">${escapeHtml(city.name)}</div>
+          <div class="tile-sub">${city.schools.length} школ</div>
+          <button class="tile-del" data-del-city="${city.id}" title="Удалить город">✕</button>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('addCityBtn').addEventListener('click', () => {
+      openPromptModal({
+        title:'Новый город', subtitle:'Введите название города', placeholder:'Например: Москва',
+        onConfirm: (name) => {
+          state.cities.push({ id: uid('c'), name, schools: [] });
+          saveState(); render();
+        }
+      });
+    });
+
+    grid.querySelectorAll('.tile[data-city]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.tile-del')) return;
+        path = { cityId: el.dataset.city, schoolId:null, classId:null, studentId:null };
+        render();
+      });
+    });
+    grid.querySelectorAll('[data-del-city]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.delCity;
+        const city = getCity(id);
+        if (!city) return;
+        if (!confirm(`Удалить город "${city.name}" со всеми школами, классами, учениками и поступками?`)) return;
+        city.schools.forEach(s => s.classes.forEach(c => c.students.forEach(st => delete state.actions[st.id])));
+        state.cities = state.cities.filter(c => c.id !== id);
+        saveState(); render();
+      });
+    });
+  }
+
+  /* ============ ШКОЛЫ ============ */
+  function renderSchools() {
+    const city = getCity(path.cityId);
+    if (!city) return;
+    contentEl.innerHTML = `
+      <div class="actions">
+        <button class="btn btn-primary" id="addSchoolBtn">+ Добавить школу</button>
+      </div>
+      <div class="grid" id="schoolGrid"></div>
+    `;
+
+    const grid = document.getElementById('schoolGrid');
+    if (city.schools.length === 0) {
+      grid.innerHTML = `<div class="empty">В городе ${escapeHtml(city.name)} пока нет школ.</div>`;
+    } else {
+      grid.innerHTML = city.schools.map(school => {
+        let good = 0, bad = 0;
+        school.classes.forEach(c => { const t = totalForClass(c.id); good += t.good; bad += t.bad; });
+        return `
+          <div class="tile" data-school="${school.id}">
+            <div class="tile-name">${escapeHtml(school.name)}</div>
+            <div class="tile-sub">${school.classes.length} классов</div>
+            <div class="tile-badge ${bad>good?'bad':''}">🌟${good} / ⚠️${bad}</div>
+            <button class="tile-del" data-del-school="${school.id}" title="Удалить школу">✕</button>
+          </div>`;
+      }).join('');
+    }
+
+    document.getElementById('addSchoolBtn').addEventListener('click', () => {
+      openPromptModal({
+        title:'Новая школа', subtitle:`Город: ${city.name}`, placeholder:'Например: Школа №123',
+        onConfirm: (name) => {
+          city.schools.push({ id: uid('s'), name, classes: [] });
+          saveState(); render();
+        }
+      });
+    });
+
+    grid.querySelectorAll('.tile[data-school]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.tile-del')) return;
+        path = { ...path, schoolId: el.dataset.school, classId:null, studentId:null };
+        render();
+      });
+    });
+    grid.querySelectorAll('[data-del-school]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.delSchool;
+        const school = city.schools.find(s => s.id === id);
+        if (!school) return;
+        if (!confirm(`Удалить школу "${school.name}" со всеми классами и учениками?`)) return;
+        school.classes.forEach(c => c.students.forEach(st => delete state.actions[st.id]));
+        city.schools = city.schools.filter(s => s.id !== id);
+        saveState(); render();
+      });
+    });
+  }
+
+  /* ============ КЛАССЫ ============ */
+  function renderClasses() {
+    const school = getSchool(path.cityId, path.schoolId);
+    if (!school) return;
+    contentEl.innerHTML = `
+      <div class="actions">
+        <button class="btn btn-primary" id="addClassBtn">+ Добавить класс</button>
+      </div>
+      <div class="grid" id="classGrid"></div>
+    `;
+
+    const grid = document.getElementById('classGrid');
+    if (school.classes.length === 0) {
+      grid.innerHTML = `<div class="empty">В школе ${escapeHtml(school.name)} пока нет классов.</div>`;
+    } else {
+      grid.innerHTML = school.classes.map(cls => {
+        const t = totalForClass(cls.id);
+        return `
+          <div class="tile" data-class="${cls.id}">
+            <div class="tile-name">${escapeHtml(cls.name)}</div>
+            <div class="tile-sub">${cls.students.length} учеников</div>
+            <div class="tile-badge ${t.bad>t.good?'bad':''}">🌟${t.good} / ⚠️${t.bad}</div>
+            <button class="tile-del" data-del-class="${cls.id}" title="Удалить класс">✕</button>
+          </div>`;
+      }).join('');
+    }
+
+    document.getElementById('addClassBtn').addEventListener('click', () => {
+      openPromptModal({
+        title:'Новый класс', subtitle:`Школа: ${school.name}`, placeholder:'Например: 5 «А»',
+        onConfirm: (name) => {
+          school.classes.push({ id: uid('cl'), name, students: [] });
+          saveState(); render();
+        }
+      });
+    });
+
+    grid.querySelectorAll('.tile[data-class]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.tile-del')) return;
+        path = { ...path, classId: el.dataset.class, studentId:null };
+        render();
+      });
+    });
+    grid.querySelectorAll('[data-del-class]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.delClass;
+        const cls = school.classes.find(c => c.id === id);
+        if (!cls) return;
+        if (!confirm(`Удалить класс "${cls.name}" со всеми учениками?`)) return;
+        cls.students.forEach(st => delete state.actions[st.id]);
+        school.classes = school.classes.filter(c => c.id !== id);
+        saveState(); render();
+      });
+    });
+  }
+
+  /* ============ УЧЕНИКИ ============ */
+  function renderStudents() {
+    const cls = getClass(path.cityId, path.schoolId, path.classId);
+    if (!cls) return;
+    contentEl.innerHTML = `
+      <div class="actions">
+        <button class="btn btn-primary" id="addStudentBtn">+ Добавить ученика</button>
+      </div>
+      <div class="students" id="studentList"></div>
+    `;
+
+    const list = document.getElementById('studentList');
+    if (cls.students.length === 0) {
+      list.innerHTML = `<div class="empty">В классе ${escapeHtml(cls.name)} пока нет учеников.</div>`;
+    } else {
+      list.innerHTML = cls.students.map(st => {
+        const c = countActions(st.id);
+        return `
+          <div class="student" data-student="${st.id}">
+            <div class="avatar">${escapeHtml(st.name.charAt(0).toUpperCase())}</div>
+            <div class="s-info">
+              <div class="s-name">${escapeHtml(st.name)}</div>
+              <div class="s-class">${escapeHtml(cls.name)}</div>
+            </div>
+            <div class="s-scores">
+              <span class="s-score good">🌟 ${c.good}</span>
+              <span class="s-score bad">⚠️ ${c.bad}</span>
+            </div>
+            <button class="s-del" data-del-student="${st.id}" title="Удалить ученика">✕</button>
+          </div>`;
+      }).join('');
+    }
+
+    document.getElementById('addStudentBtn').addEventListener('click', () => {
+      openPromptModal({
+        title:'Новый ученик', subtitle:`Класс: ${cls.name}`, placeholder:'Фамилия и имя',
+        onConfirm: (name) => {
+          cls.students.push({ id: uid('st'), name });
+          saveState(); render();
+        }
+      });
+    });
+
+    list.querySelectorAll('.student[data-student]').forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (e.target.closest('.s-del')) return;
+        path = { ...path, studentId: el.dataset.student };
+        render();
+      });
+    });
+    list.querySelectorAll('[data-del-student]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.delStudent;
+        const st = cls.students.find(s => s.id === id);
+        if (!st) return;
+        if (!confirm(`Удалить ученика "${st.name}" со всеми его поступками?`)) return;
+        delete state.actions[id];
+        cls.students = cls.students.filter(s => s.id !== id);
+        saveState(); render();
+      });
+    });
+  }
+
+  /* ============ ПОСТУПКИ ============ */
+  function renderActions() {
+    const st = getStudent(path.cityId, path.schoolId, path.classId, path.studentId);
+    if (!st) return;
+
+    contentEl.innerHTML = `
+      <div class="panel">
+        <h3>Новый поступок для ${escapeHtml(st.name)}</h3>
+        <div class="form-row">
+          <div class="input-group">
+            <label>Что случилось?</label>
+            <input type="text" id="entryInput" placeholder="Например: помог с домашним заданием" maxlength="100">
+          </div>
+          <div class="type-selector">
+            <button type="button" class="type-btn active-good" id="btnGood">👍 Хороший</button>
+            <button type="button" class="type-btn" id="btnBad">👎 Плохой</button>
+          </div>
+          <button class="btn btn-primary" id="addBtn">Добавить</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Поступки</h3>
+        <div class="entries" id="entriesList"></div>
+      </div>
+    `;
+
+    currentType = 'good';
+    const btnGood = document.getElementById('btnGood');
+    const btnBad = document.getElementById('btnBad');
+    const entryInput = document.getElementById('entryInput');
+    const addBtn = document.getElementById('addBtn');
+    const entriesList = document.getElementById('entriesList');
+
+    function setType(type) {
+      currentType = type;
+      btnGood.classList.toggle('active-good', type === 'good');
+      btnBad.classList.toggle('active-bad', type === 'bad');
+    }
+    btnGood.addEventListener('click', () => setType('good'));
+    btnBad.addEventListener('click', () => setType('bad'));
+    setType('good');
+
+    function renderEntriesList() {
+      const items = (state.actions[st.id] || []).slice().sort((a,b) => b.id - a.id);
+      if (items.length === 0) {
+        entriesList.innerHTML = `<div class="empty">Пока нет записей. Добавь первый поступок!</div>`;
+        return;
+      }
+      entriesList.innerHTML = items.map(entry => {
+        const isGood = entry.type === 'good';
+        return `
+          <div class="entry ${isGood?'good':'bad'}">
+            <div class="e-icon">${isGood?'🌟':'⚠️'}</div>
+            <div class="e-body">
+              <div class="e-text">${escapeHtml(entry.text)}</div>
+              <div class="e-date">${formatDate(entry.date)}</div>
+            </div>
+            <div class="e-score">${isGood?'+1':'–1'}</div>
+            <button class="del" data-id="${entry.id}" title="Удалить">✕</button>
+          </div>`;
+      }).join('');
+      entriesList.querySelectorAll('.del').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = Number(btn.dataset.id);
+          state.actions[st.id] = (state.actions[st.id] || []).filter(a => a.id !== id);
+          if (state.actions[st.id].length === 0) delete state.actions[st.id];
+          saveState(); renderEntriesList();
+        });
+      });
+    }
+
+    function addAction() {
+      const text = entryInput.value.trim();
+      if (!text) { entryInput.focus(); return; }
+      if (!state.actions[st.id]) state.actions[st.id] = [];
+      state.actions[st.id].push({
+        id: Date.now(),
+        text,
+        type: currentType,
+        date: new Date().toISOString()
+      });
+      saveState();
+      entryInput.value = '';
+      entryInput.focus();
+      renderEntriesList();
+    }
+
+    addBtn.addEventListener('click', addAction);
+    entryInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); addAction(); }
+    });
+
+    renderEntriesList();
+  }
+
+  // ============ СТАРТ ============
+  loadState();
+  render();
+})();
+</script>
+
+</body>
+</html>
